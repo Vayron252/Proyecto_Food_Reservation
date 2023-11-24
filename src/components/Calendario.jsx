@@ -1,53 +1,82 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useLayoutEffect } from "react"
 
 const fechaDate = (month, year) => {
-    const parts = (`${year}-${month.toString().padStart(2, '0')}-01`).split('-');
-    const mydate = new Date(parts[0], parts[1] - 1, parts[2]);
-    return mydate;
+  const parts = (`${year}-${month.toString().padStart(2, '0')}-01`).split('-');
+  const mydate = new Date(parts[0], parts[1] - 1, parts[2]);
+  return mydate;
+}
+
+export const Calendario = ({ month, year, daysLunch, setFecha }) => {
+  const date = fechaDate(month, year);
+  const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
+  const [numbersDay, setNumbersDay] = useState([]);
+  const [monthName, setMonthName] = useState('');
+  const firstDayOfMonthRef = useRef(null);
+
+  // const daysLunch = ['02/11/2023','10/11/2023','20/11/2023'];
+  
+  // const [date, setDate] = useState(fechaDate(month, year));
+  // const refs = useRef([]);
+
+  const initializeCalendar = () => {
+    // const date = fechaDate(month, year);
+    setMonthName(new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(date));
+    const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    let dias = [];
+    let contador = 1;
+    while (contador <= lastDayOfMonth.getDate()) {
+      const fecha = `${contador.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`
+      const day = { number: contador, fecha: fecha, lunch: daysLunch.includes(fecha) }
+      dias.push(day);
+      contador++;
+    }
+    setNumbersDay(dias);
+    // initialDayOfMonthRef.current.style.gridColumn = `${date.getDay() + 1} / span 1`;
+    // console.log(refs.current);
   }
 
-export const Calendario = ({ month, year }) => {
-    const [numberDay, setNumberDay] = useState([]);
-    const [monthName, setMonthName] = useState('');
-  
-    const initialDayOfMonthRef = useRef(null);
-  
-    const inicializarPage = () => {
-      const date = fechaDate(month, year);
-      setMonthName(new Intl.DateTimeFormat('es-ES', { month: 'long'}).format(date));
-      const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-      let dias = [];
-      let contador = 1;
-      while(contador <= lastDayOfMonth.getDate()){
-        dias.push(contador);
-        contador ++;
-      }
-      setNumberDay(dias);
-      initialDayOfMonthRef.current.style.gridColumn = `${date.getDay() + 1} / span 1`;
+  useEffect(() => {
+    initializeCalendar();
+  }, [month, year, daysLunch])
+
+  useLayoutEffect(() => {
+    // console.log(refs.current);
+    // refs.current.style.gridColumn = `1 / span 1`;
+    // if (refs.current[0]) {
+    //   refs.current[0].style.gridColumn = `${date.getDay() + 1} / span 1`;
+    //   // console.log(refs.current[0].style.gridColumn = `1 / span 1`)
+    // }
+    if (firstDayOfMonthRef.current) {
+      firstDayOfMonthRef.current.style.gridColumn = `${date.getDay() + 1} / span 1`;
     }
-  
-    useEffect(() => {
-      inicializarPage();
-    }, [month, year])
+  });
+
+  const handleClickDay = (e) => {
+    const fechaSeleccionada = e.target.getAttribute('data-fecha');
+    // alert(`Seleccionaste: ${fechaSeleccionada}`);
+    setFecha(fechaSeleccionada);
+  }
 
   return (
     <div className="calendario__mes">
-        <h2 className="calendario__mes__nombre">{monthName.toUpperCase()}</h2>
-        <div className="calendario__mes__semana">
-          <div className="calendario__mes__semana__dia">Dom</div>
-          <div className="calendario__mes__semana__dia">Lun</div>
-          <div className="calendario__mes__semana__dia">Mar</div>
-          <div className="calendario__mes__semana__dia">Mie</div>
-          <div className="calendario__mes__semana__dia">Jue</div>
-          <div className="calendario__mes__semana__dia">Vie</div>
-          <div className="calendario__mes__semana__dia">Sab</div>
-        </div>
-        <div className="calendario__mes__dias">
-          <div ref={initialDayOfMonthRef} className="calendario__mes__dia" key={1}>1</div>
-          {numberDay.map(day => (
-            day !== 1 ? <div className="calendario__mes__dia" key={day}>{day}</div> : null
-          ))}
-        </div>
+      <h2 className="calendario__mes__nombre">{monthName.toUpperCase()}</h2>
+      <div className="calendario__mes__semana">
+        {daysOfWeek.map(dayName => (
+          <div className="calendario__mes__semana__dia" key={dayName}>{dayName}</div>
+        ))}
       </div>
+      <div className="calendario__mes__dias">
+        {/* <div ref={initialDayOfMonthRef} className="calendario__mes__dia" key={1}>1</div> */}
+        {/* {numbersDay.map(dayNumber => (
+            dayNumber !== 1 ? <div className="calendario__mes__dia" key={dayNumber}>{dayNumber}</div> : null
+          ))} */}
+        {/* ref={ref => (refs.current[i] = ref)} */}
+        {numbersDay.map((dayNumber, i) => (
+          <div ref={dayNumber.number === 1 ? firstDayOfMonthRef : null} onClick={handleClickDay} data-fecha={dayNumber.fecha} className="calendario__mes__dia" key={dayNumber.number}>
+            {dayNumber.number} {dayNumber.lunch && <div className="calendario__mes__dia__almuerzo"><i className="fa-solid fa-utensils"></i></div>}
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }

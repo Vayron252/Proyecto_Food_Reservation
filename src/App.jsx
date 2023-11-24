@@ -1,30 +1,39 @@
+import { useState } from "react";
 import { Calendario } from "./components/Calendario";
 import "./app.css"
 
 export const App = () => {
-  const month = 11;
-  const year = 2023;
+  const [daysLunch, setDaysLunch] = useState([]);
+  const [fecha, setFecha] = useState('');
 
   const meses = [
     {
-      month: 7,
-      year: 2023
-    },
-    {
-      month: 9,
-      year: 2023
-    },
-    {
       month: 11,
+      year: 2023
+    },
+    {
+      month: 12,
       year: 2023
     }
   ]
 
+  const handleClick = () => {
+    if (daysLunch.includes(fecha)) {
+      alert("Ya no más!!!");
+      return;
+    }
+    setDaysLunch([...daysLunch, fecha]);
+  }
+
   return (
-    <div className="contenedor">
-      {meses.map((valor, index) => (
-        <Calendario key={index} month={valor.month} year={valor.year} />
-      ))}
-    </div>
+    <>
+      <button onClick={handleClick}>ClickMe!!!</button>
+      <input type="text" onChange={e => setFecha(e.target.value)} value={fecha} />
+      <div className="seccion__calendario contenedor">
+        {meses.map((valor, index) => (
+          <Calendario key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} />
+        ))}
+      </div>
+    </>
   )
 }
