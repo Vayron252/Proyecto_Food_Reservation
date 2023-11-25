@@ -1,12 +1,12 @@
-import { Outlet } from 'react-router-dom'
 import { MainFooter } from '../components/MainFooter'
+import { MainHeader } from '../components/MainHeader'
+import { MainPages } from '../components/MainPages'
 
 export const MainLayout = () => {
   return (
     <>
-        <h2>Este el el layout</h2>
-
-        <Outlet />
+        <MainHeader />
+        <MainPages />
         <MainFooter />
     </>
   )
