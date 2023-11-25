@@ -1,3 +1,4 @@
+/* Calendar */
 .calendario__mes__nombre {
     background-color: rgb(203, 179, 226);
     color: white;
@@ -39,16 +40,11 @@
     background-color: rgb(197, 174, 197);
     color: white;
 }
-/* .calendario__mes__dias .calendario__mes__dia:first-of-type {
-    grid-column: 4 / span 1;
-} */
-
 .seccion__calendario {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
-
 .calendario__mes__dia__almuerzo {
     position: absolute;
     right: .2rem;

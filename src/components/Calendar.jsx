@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useLayoutEffect } from "react"
+import '../styles/components.css'
 
 const fechaDate = (month, year) => {
   const parts = (`${year}-${month.toString().padStart(2, '0')}-01`).split('-');
@@ -6,7 +7,7 @@ const fechaDate = (month, year) => {
   return mydate;
 }
 
-export const Calendario = ({ month, year, daysLunch, setFecha }) => {
+export const Calendar = ({ month, year, daysLunch, setFecha }) => {
   const date = fechaDate(month, year);
   const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
   const [numbersDay, setNumbersDay] = useState([]);

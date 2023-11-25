@@ -1,39 +1,41 @@
-import { useState } from "react";
-import { Calendario } from "./components/Calendario";
-import "./app.css"
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { HomePage } from './pages/HomePage'
+import { CalendarPage } from './pages/CalendarPage'
+import { FoodPage } from './pages/FoodPage'
+import { ProfilePage } from './pages/ProfilePage'
+import { MainLayout } from './layouts/MainLayout';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />
+      },
+      {
+        path: "/calendario",
+        element: <CalendarPage />
+      },
+      {
+        path: "/productos/:categoria",
+        element: <FoodPage />
+      },
+      {
+        path: "/perfil",
+        element: <ProfilePage />
+      }
+    ]
+  },
+  {
+    path: "/login",
+    element: <h2>Pantalla de login</h2>
+  }
+]);
 
 export const App = () => {
-  const [daysLunch, setDaysLunch] = useState([]);
-  const [fecha, setFecha] = useState('');
-
-  const meses = [
-    {
-      month: 11,
-      year: 2023
-    },
-    {
-      month: 12,
-      year: 2023
-    }
-  ]
-
-  const handleClick = () => {
-    if (daysLunch.includes(fecha)) {
-      alert("Ya no más!!!");
-      return;
-    }
-    setDaysLunch([...daysLunch, fecha]);
-  }
-
   return (
-    <>
-      <button onClick={handleClick}>ClickMe!!!</button>
-      <input type="text" onChange={e => setFecha(e.target.value)} value={fecha} />
-      <div className="seccion__calendario contenedor">
-        {meses.map((valor, index) => (
-          <Calendario key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} />
-        ))}
-      </div>
-    </>
+    <RouterProvider router={router} />
   )
 }
