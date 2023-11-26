@@ -2,7 +2,7 @@
 export const FoodPage = () => {
   return (
     <div>
-      <p>Footer</p>
+      <h2>Food pages</h2>
       <p>Contenido</p>
       <p>Contenido</p>
       <p>Contenido</p>
@@ -91,14 +91,7 @@ export const FoodPage = () => {
       <p>Contenido</p>
       <p>Contenido</p>
       <p>Contenido</p>
-      <p>Contenido</p>
-      <p>Contenido</p>
-      <p>Contenido</p>
-      <p>Contenido</p>
-      <p>Contenido</p>
-      <p>Contenido</p>
-      <p>Contenido</p>
-      <p>Contenido</p>
+      <h2>Food pages</h2>
     </div>
   )
 }

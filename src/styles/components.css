@@ -54,3 +54,57 @@
     background-color: cadetblue;
     color: white;
 }
+
+/* Sidebar */
+/* .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    background-color: cadetblue;
+    height: 100vh;
+    z-index: 10;
+    transition: all .5s ease;
+    transform: translateX(100%);
+}
+.sidebar.active {
+    transform: translateX(0%);
+} */
+/* .sidebar__helper {
+    background-color: dimgray;
+    width: 20%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 10;
+    opacity: .3;
+    animation-delay: .3s;
+} */
+
+.sidebar__helper {
+    position: fixed;
+    background-color: dimgray;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    opacity: .3;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100vh;
+    background-color: cadetblue;
+    z-index: 11;
+    transition: all .5s ease;
+    transform: translateX(100%);
+}
+
+.sidebar.active {
+    transform: translateX(0%);
+}

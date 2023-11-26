@@ -4,6 +4,7 @@ import { CalendarPage } from './pages/CalendarPage'
 import { FoodPage } from './pages/FoodPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { MainLayout } from './layouts/MainLayout';
+import { AppContextProvider } from './contexts/AppContext'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,8 @@ const router = createBrowserRouter([
 
 export const App = () => {
   return (
-    <RouterProvider router={router} />
+    <AppContextProvider>
+      <RouterProvider router={router} />
+    </AppContextProvider>
   )
 }
