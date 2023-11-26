@@ -1,30 +1,29 @@
-import { useRef, useEffect } from 'react'
 import { useApp } from '../hooks/useApp'
 import '../styles/components.css'
-import { enableBodyScroll } from 'body-scroll-lock';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock'
 
 export const Sidebar = () => {
     const { openSidebar, handleOpenOrCloseSidebar } = useApp();
-    const sidebarRef = useRef();
+    const { toggleBodyScroll }  = useBodyScrollLock();
 
-    const handleClick = () => {
-        const observerRefValue = sidebarRef.current;
-        console.log(observerRefValue);
+    const handleCloseMenuBar = () => {
+        toggleBodyScroll();
         handleOpenOrCloseSidebar();
-        enableBodyScroll(observerRefValue);
     }
 
     return (
         <>
-            {/* <div className="sidebar__helper"></div> */}
-            {/* <div className={`sidebar ${openSidebar ? 'active' : ''}`}>
-                <h2>Hola soy un sidebar</h2>
-                <button onClick={handleOpenOrCloseSidebar}>Close</button>
-            </div> */}
-            {openSidebar && <div className="sidebar__helper"></div>}
-            <div ref={sidebarRef} className={`sidebar ${openSidebar ? 'active' : ''}`}>
-                <h2>Hola Soy el sidebar</h2>
-                <button onClick={handleClick}>Close</button>
+            {openSidebar && <div onClick={handleCloseMenuBar} className="sidebar__helper"></div>}
+            <div className={`sidebar ${openSidebar ? 'active' : ''}`}>
+                <i className="fa-regular fa-circle-xmark sidebar__boton__cerrar" onClick={handleCloseMenuBar}></i>
+                <h2 className="sidebar__titulo">Menú Principal</h2>
+                <ul className="sidebar__links">
+                    <li className="sidebar__links__item">Inicio</li>
+                    <li className="sidebar__links__item">Calendario</li>
+                    <li className="sidebar__links__item">Productos</li>
+                    <li className="sidebar__links__item">Promociones</li>
+                    <li className="sidebar__links__item">Perfíl</li>
+                </ul>
             </div>
         </>
     )

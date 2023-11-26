@@ -2,5 +2,20 @@
 
 /* MainPages */
 .main {
-    padding-bottom: 8rem;
+    padding-bottom: 7.5rem;
+}
+@media (min-width: 992px) {
+    .main {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        padding-bottom: 0;
+    }
+}
+.main__helper {
+    display: none;
+}
+@media (min-width: 992px) {
+    .main__helper {
+        display: block;
+    }
 }

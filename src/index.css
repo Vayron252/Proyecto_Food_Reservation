@@ -1,6 +1,10 @@
 /* Globales */
 :root {
     --fuente-principal: 'Roboto', sans-serif;
+    --colorPrimario: #2b5166;
+    --colorBlanco: #FFFFFF;
+    --colorGris: #808080;
+    --colorNegro: #000000;
 }
 html {
     font-size: 62.5%;

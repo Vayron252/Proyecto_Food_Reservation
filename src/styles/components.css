@@ -1,7 +1,7 @@
 /* Calendar */
 .calendario__mes__nombre {
     background-color: rgb(203, 179, 226);
-    color: white;
+    color: var(--colorBlanco);
     padding: 1rem 0;
     text-align: center;
     font-size: 2rem;
@@ -16,7 +16,7 @@
     background-color: cadetblue;
     font-weight: 700;
     font-size: 1.2rem;
-    color: white;
+    color: var(--colorBlanco);
 }
 .calendario__mes__dias {
     display: grid;
@@ -26,7 +26,7 @@
     border: .1rem solid bisque;
 }
 .calendario__mes__dia {
-    background-color: white;
+    background-color: var(--colorBlanco);
     text-align: center;
     padding: 2rem 0;
     font-weight: 700;
@@ -38,7 +38,7 @@
 }
 .calendario__mes__dia:hover {
     background-color: rgb(197, 174, 197);
-    color: white;
+    color: var(--colorBlanco);
 }
 .seccion__calendario {
     display: flex;
@@ -52,59 +52,71 @@
     padding: .4rem;
     border-radius: .5rem;
     background-color: cadetblue;
-    color: white;
+    color: var(--colorBlanco);
 }
 
 /* Sidebar */
-/* .sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 80%;
-    background-color: cadetblue;
-    height: 100vh;
-    z-index: 10;
-    transition: all .5s ease;
-    transform: translateX(100%);
-}
-.sidebar.active {
-    transform: translateX(0%);
-} */
-/* .sidebar__helper {
-    background-color: dimgray;
-    width: 20%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 10;
-    opacity: .3;
-    animation-delay: .3s;
-} */
-
 .sidebar__helper {
     position: fixed;
-    background-color: dimgray;
+    background-color: var(--colorGris);
     width: 100%;
     height: 100vh;
     top: 0;
     left: 0;
     z-index: 10;
-    opacity: .3;
+    opacity: .4;
 }
-
+@media (min-width: 992px) {
+    .sidebar__helper {
+        display: none;
+    }
+}
 .sidebar {
     position: fixed;
     top: 0;
     right: 0;
     width: 80%;
     height: 100vh;
-    background-color: cadetblue;
+    background-color: var(--colorPrimario);
     z-index: 11;
     transition: all .5s ease;
     transform: translateX(100%);
+    padding: 0 1rem;
 }
-
 .sidebar.active {
     transform: translateX(0%);
+}
+@media (min-width: 992px) {
+    .sidebar {
+        transform: none;
+        top: 0;
+        left: 0;
+        width: 20%;
+        transition: none;
+    }
+}
+.sidebar__boton__cerrar {
+    color: var(--colorBlanco);
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    font-size: 3.5rem;
+    cursor: pointer;
+}
+@media (min-width: 992px) {
+    .sidebar__boton__cerrar {
+        display: none;
+    }
+}
+.sidebar__titulo {
+    color: var(--colorBlanco);
+    font-size: 2.5rem;
+    margin-top: 2rem;
+}
+.sidebar__links {
+    list-style: none;
+}
+.sidebar__links__item {
+    color: var(--colorBlanco);
+    font-size: 1.5rem;
 }

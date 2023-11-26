@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: white;
+    background-color: var(--colorPrimario);
     position: sticky;
     top: 0;
     left: 0;
@@ -21,11 +21,23 @@
         display: none;
     }
 }
+.header__contenido__empresa {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+}
 .header__contenedor__logo {
     width: 5.5rem;
 }
 .header__imagen__barra {
     font-size: 3.7rem;
-    color: #006666;
+    color: var(--colorBlanco);
     cursor: pointer;
+}
+.header__nombreempresa {
+    color: var(--colorBlanco);
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 2rem;
 }
