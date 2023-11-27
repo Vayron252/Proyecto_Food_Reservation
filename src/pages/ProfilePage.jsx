@@ -1,85 +1,9 @@
+import imgconstruccion from '../img/pagina_construccion.jpg'
 
 export const ProfilePage = () => {
   return (
     <div>
-      <h2>Profile1</h2>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <h2>Content2</h2>
+      <img src={imgconstruccion} alt="imagen en construccion" />
     </div>
   )
 }

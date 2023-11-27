@@ -1,0 +1,47 @@
+/* HomePage */
+.seccion__anuncios__comunidad {
+    padding: 2rem 0;
+}
+.seccion__anuncios {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+@media (min-width: 768px) {
+    .seccion__anuncios {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 992px) {
+    .seccion__anuncios {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.anuncios__busqueda {
+    position: relative;
+}
+.anuncios__busqueda__entrada {
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 1rem 4rem 1rem 1rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    background-color: var(--colorBlanco);
+}
+.anuncios__busqueda__entrada:hover {
+    border: .1rem solid var(--colorNegro);
+}
+.anuncios__busqueda__imagen {
+    position: absolute;
+    right: 1.3rem;
+    top: 1rem;
+    font-size: 1.7rem;
+}
+
+.anuncio {
+    padding: 1rem;
+    background-color: var(--colorBlanco);
+    border-radius: 1rem;
+}

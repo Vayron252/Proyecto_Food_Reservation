@@ -2,6 +2,7 @@
 :root {
     --fuente-principal: 'Roboto', sans-serif;
     --colorPrimario: #2b5166;
+    --colorSecundario: #429867;
     --colorBlanco: #FFFFFF;
     --colorGris: #808080;
     --colorNegro: #000000;
@@ -24,4 +25,12 @@ img {
 }
 body {
     font-family: var(--fuente-principal);
+    background-color: #bac9a9;
+}
+
+/* Utilitarios */
+.contenedor {
+    width: 95%;
+    max-width: 120rem;
+    margin: 0 auto;
 }
