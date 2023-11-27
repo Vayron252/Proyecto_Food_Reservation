@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useApp } from '../hooks/useApp'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock'
@@ -18,6 +19,19 @@ export const Sidebar = () => {
         navigate(pathName);
         handleCloseMenuBar();
     }
+
+    useEffect(() => {
+        const handleResize = () => {
+            // Perform actions on window resize
+            if (openSidebar) {
+                handleCloseMenuBar();
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [openSidebar]);
 
     return (
         <>
