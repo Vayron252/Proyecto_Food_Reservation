@@ -39,4 +39,6 @@
 .footer__contenedor__link__imagen {
     font-size: 2.2rem;
     color: var(--colorPrimario);
+    width: 2.475rem;
+    height: 2.2rem;
 }
