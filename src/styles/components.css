@@ -243,3 +243,46 @@
     font-weight: 900;
     font-size: 2rem;
 }
+
+/* AnnouncementCard */
+.anuncio {
+    padding: 1rem;
+    background-color: var(--colorBlanco);
+    border-radius: 1rem;
+}
+.anuncio__contenedor__imagen {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    overflow: hidden;
+    width: 100%;
+    height: 32rem;
+}
+.anuncio__imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+.anuncio__descripcion {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    text-align: justify;
+}
+.anuncio__leermas {
+    margin: 1rem auto 0 auto;
+    display: block;
+    outline: none;
+    background-color: var(--colorPrimario);
+    color: var(--colorBlanco);
+    padding: 1rem 4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 1rem;
+    border: .2rem solid var(--colorPrimario);
+    cursor: pointer;
+    transition: all .2s;
+}
+.anuncio__leermas:hover {
+    background-color: var(--colorBlanco);
+    color: var(--colorPrimario);
+}

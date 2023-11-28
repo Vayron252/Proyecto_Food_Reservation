@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Calendar } from "../components/Calendar";
+import { useState } from 'react'
+import { Calendar } from '../components/Calendar'
+import '../styles/pages.css'
 
 export const CalendarPage = () => {
     const [daysLunch, setDaysLunch] = useState([]);
@@ -21,14 +22,15 @@ export const CalendarPage = () => {
     }
 
     return (
-        <>
-            <button onClick={handleClick}>ClickMe!!!</button>
+        <section className="seccion__calendario contenedor">
+            <button className="calendario__agregar" onClick={handleClick}>
+                <span>28</span>
+                <span>Nov</span>
+            </button>
             <input type="text" onChange={e => setFecha(e.target.value)} value={fecha} />
-            <div className="seccion__calendario contenedor">
-                {meses.map((valor, index) => (
-                    <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} />
-                ))}
-            </div>
-        </>
+            {meses.map((valor, index) => (
+                <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} />
+            ))}
+        </section>
     )
 }

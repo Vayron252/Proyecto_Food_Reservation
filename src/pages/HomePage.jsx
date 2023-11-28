@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SpinnerCircle } from '../components/helpers/SpinnerCircle'
 import { AnnouncementCard } from '../components/AnnouncementCard'
 import '../styles/pages.css'
 
 export const HomePage = () => {
     const [loading, setLoading] = useState(false);
-    const [announcements, setAnnouncements] = useState([1, 1]);
+    const [announcements, setAnnouncements] = useState([1]);
 
     const handleShowMore = () => {
         setLoading(true);
