@@ -1,7 +1,20 @@
-import img_anuncio from '../img/anuncios.jpg'
+import { useState } from 'react'
+import { SpinnerCircle } from '../components/helpers/SpinnerCircle'
+import { AnnouncementCard } from '../components/AnnouncementCard'
 import '../styles/pages.css'
 
 export const HomePage = () => {
+    const [loading, setLoading] = useState(false);
+    const [announcements, setAnnouncements] = useState([1, 1]);
+
+    const handleShowMore = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setAnnouncements([...announcements, 1, 1, 1, 1]);
+            setLoading(false);
+        }, 2000);
+    }
+
     return (
         <section className="seccion__anuncios__comunidad contenedor">
             <div className="anuncios__busqueda">
@@ -9,18 +22,15 @@ export const HomePage = () => {
                 <i className="fa-solid fa-magnifying-glass anuncios__busqueda__imagen"></i>
             </div>
             <div className="anuncios__contenedor">
-                <article className="anuncio">
-                    <div className="anuncio__contenedor__imagen">
-                        <img src={img_anuncio} alt="" />
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel illo nesciunt tempora corrupti repudiandae, ipsum laudantium voluptatibus, dolorum libero porro molestiae quaerat ea fugiat accusamus dolorem animi nulla omnis magni! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut dicta consequuntur amet ipsum expedita distinctio, dolor laborum accusamus perspiciatis non quasi excepturi eius sapiente nulla pariatur temporibus eaque nam asperiores.</p>
-                    <button className="">Leer Más</button>
-                </article>
+                {announcements.map((announcement, index) => (
+                    <AnnouncementCard key={index}/>
+                ))}
             </div>
             <div className="anuncios__contenedor__mostrarmas">
-                <button className="anuncios__mostrarmas">
-                    <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
-                </button>
+                {loading ? (<SpinnerCircle />) :
+                    (<button className="anuncios__mostrarmas" onClick={handleShowMore}>
+                        <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
+                    </button>)}
             </div>
         </section>
     )
