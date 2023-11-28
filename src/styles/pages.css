@@ -2,19 +2,19 @@
 .seccion__anuncios__comunidad {
     padding: 2rem 0;
 }
-.seccion__anuncios {
+.anuncios__contenedor {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
 }
 @media (min-width: 768px) {
-    .seccion__anuncios {
+    .anuncios__contenedor {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 @media (min-width: 992px) {
-    .seccion__anuncios {
+    .anuncios__contenedor {
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -39,9 +39,26 @@
     top: 1rem;
     font-size: 1.7rem;
 }
-
 .anuncio {
     padding: 1rem;
     background-color: var(--colorBlanco);
     border-radius: 1rem;
+}
+.anuncios__contenedor__mostrarmas {
+    margin-top: 1.5rem;
+}
+.anuncios__mostrarmas {
+    margin: 0 auto;
+    display: block;
+    background-color: var(--colorBlanco);
+    outline: none;
+    border: .2rem solid var(--colorPrimario);
+    padding: 1rem 2.5rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--colorPrimario);
+}
+.anuncios__mostrarmas__imagen {
+    font-size: 1.5rem;
 }
