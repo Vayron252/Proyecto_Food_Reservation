@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useApp } from '../hooks/useApp'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock'
+import { useScreenSize } from '../hooks/useScreenSize'
 import '../styles/components.css'
 import icohome from '../img/ico_home.png'
 import icocalendar from '../img/ico_calendar.png'
@@ -13,10 +14,14 @@ import { Logo } from './Logo'
 export const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { width } = useScreenSize();
     const { openSidebar, handleOpenOrCloseSidebar } = useApp();
     const { toggleBodyScroll }  = useBodyScrollLock();
 
     const handleCloseMenuBar = () => {
+        if (width >= 992) {
+            return;
+        }
         toggleBodyScroll();
         handleOpenOrCloseSidebar();
     }

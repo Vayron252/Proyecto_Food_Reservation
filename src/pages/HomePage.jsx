@@ -17,20 +17,25 @@ export const HomePage = () => {
 
     return (
         <section className="seccion__anuncios__comunidad contenedor">
-            <div className="anuncios__busqueda">
-                <input className="anuncios__busqueda__entrada" type="text" placeholder="Hola Marco Alarcón, ¿qué publicación estás buscando?" />
-                <i className="fa-solid fa-magnifying-glass anuncios__busqueda__imagen"></i>
+            <div className="panel__anuncios">
+                <div className="anuncios__busqueda">
+                    <input className="anuncios__busqueda__entrada" type="text" placeholder="Hola Marco Alarcón, ¿qué publicación estás buscando?" />
+                    <i className="fa-solid fa-magnifying-glass anuncios__busqueda__imagen"></i>
+                </div>
+                <div className="anuncios__contenedor">
+                    {announcements.map((announcement, index) => (
+                        <AnnouncementCard key={index}/>
+                    ))}
+                </div>
+                <div className="anuncios__contenedor__mostrarmas">
+                    {loading ? (<SpinnerCircle />) :
+                        (<button className="anuncios__mostrarmas" onClick={handleShowMore}>
+                            <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
+                        </button>)}
+                </div>
             </div>
-            <div className="anuncios__contenedor">
-                {announcements.map((announcement, index) => (
-                    <AnnouncementCard key={index}/>
-                ))}
-            </div>
-            <div className="anuncios__contenedor__mostrarmas">
-                {loading ? (<SpinnerCircle />) :
-                    (<button className="anuncios__mostrarmas" onClick={handleShowMore}>
-                        <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
-                    </button>)}
+            <div className="panel__recordatorio">
+                <h2>Aún no se ha reservado los almuerzos</h2>
             </div>
         </section>
     )

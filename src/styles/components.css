@@ -257,6 +257,16 @@
     width: 100%;
     height: 32rem;
 }
+@media (min-width: 768px) {
+    .anuncio__contenedor__imagen {
+        height: 60rem;
+    }
+}
+@media (min-width: 992px) {
+    .anuncio__contenedor__imagen {
+        height: 80rem;
+    }
+}
 .anuncio__imagen {
     width: 100%;
     height: 100%;

@@ -1,8 +1,8 @@
 /* Globales */
 :root {
     --fuente-principal: 'Roboto', sans-serif;
-    --colorPrimario: #2b5166;
-    --colorSecundario: #429867;
+    --colorPrimario: #153243;
+    --colorSecundario: #CCDAD1;
     --colorBlanco: #FFFFFF;
     --colorGris: #808080;
     --colorNegro: #000000;
@@ -25,12 +25,12 @@ img {
 }
 body {
     font-family: var(--fuente-principal);
-    background-color: #bac9a9;
+    background-color: var(--colorSecundario);
 }
 
 /* Utilitarios */
 .contenedor {
     width: 95%;
-    max-width: 120rem;
+    max-width: 170rem;
     margin: 0 auto;
 }
