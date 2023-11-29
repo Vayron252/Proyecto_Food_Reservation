@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState, Suspense } from 'react'
 import { SpinnerCircle } from '../components/helpers/SpinnerCircle'
 import { AnnouncementCard } from '../components/AnnouncementCard'
 import '../styles/pages.css'
 
-export const HomePage = () => {
+const HomePage = () => {
     const [loading, setLoading] = useState(false);
     const [announcements, setAnnouncements] = useState([1]);
 
@@ -23,16 +23,16 @@ export const HomePage = () => {
                     <i className="fa-solid fa-magnifying-glass anuncios__busqueda__imagen"></i>
                 </div>
                 <div className="anuncios__contenedor">
-                    {announcements.map((announcement, index) => (
-                        <AnnouncementCard key={index}/>
-                    ))}
-                </div>
-                <div className="anuncios__contenedor__mostrarmas">
-                    {loading ? (<SpinnerCircle />) :
-                        (<button className="anuncios__mostrarmas" onClick={handleShowMore}>
-                            <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
-                        </button>)}
-                </div>
+                        {announcements.map((announcement, index) => (
+                            <AnnouncementCard key={index} />
+                        ))}
+                    </div>
+                    <div className="anuncios__contenedor__mostrarmas">
+                        {loading ? (<SpinnerCircle />) :
+                            (<button className="anuncios__mostrarmas" onClick={handleShowMore}>
+                                <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
+                            </button>)}
+                    </div>
             </div>
             <div className="panel__recordatorio">
                 <h2>Aún no se ha reservado los almuerzos</h2>
@@ -40,3 +40,5 @@ export const HomePage = () => {
         </section>
     )
 }
+
+export default HomePage

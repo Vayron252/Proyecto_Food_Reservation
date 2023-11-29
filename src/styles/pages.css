@@ -108,9 +108,19 @@
     border-radius: 1rem;
     padding: 1rem;
 }
+.productos__titulo {
+    color: var(--colorPrimario);
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+}
 .producto__almuerzo {
-    padding: 1rem;
-    background-color: #457d97;
+    /* padding: 1rem; */
+    background-color: var(--colorTerciario);
+    border: .2rem solid var(--colorPrimario);
+    overflow: hidden;
+    border-radius: 2rem;
 }
 .producto__almuerzo__contenedor__imagen {
     width: 100%;
@@ -125,9 +135,11 @@
     object-fit: cover;
     object-position: center center;
 }
+.producto__almuerzo__contenido {
+    padding: 1rem;
+}
 .producto__almuerzo__dia {
-    color: var(--colorBlanco);
-    margin-top: 1rem;
+    color: var(--colorPrimario);
     font-size: 1.8rem;
     font-weight: 700;
 }
@@ -143,9 +155,10 @@
 }
 .producto__almuerzo__descripcion {
     margin-top: 1rem;
-    color: var(--colorBlanco);
+    color: var(--colorPrimario);
     font-size: 1.3rem;
     text-align: justify;
+    padding: 0 .5rem;
 }
 .producto__almuerzo__reservar {
     margin-top: 1rem;
@@ -158,12 +171,10 @@
     font-weight: 700;
     cursor: pointer;
 }
-
-.swiper {
-    width: 32rem;
-    margin: 1rem;
-  }
-
-  .swiper-slide {
+.seccion__productos .swiper {
+    width: 28rem;
+    margin: 2rem auto 0 auto;
+}
+.seccion__productos .swiper-slide {
     border-radius: 1.5rem;
-  }
+}

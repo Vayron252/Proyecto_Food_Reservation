@@ -1,0 +1,9 @@
+/* ChargingScreen */
+.screen__loading {
+    width: 100%;
+    height: calc(100vh - 14rem);
+    /* background-color: var(--colorBlanco); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

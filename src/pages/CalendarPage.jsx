@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Calendar } from '../components/Calendar'
 import '../styles/pages.css'
 
-export const CalendarPage = () => {
+const CalendarPage = () => {
     const [daysLunch, setDaysLunch] = useState([]);
     const [fecha, setFecha] = useState('');
 
@@ -34,3 +34,5 @@ export const CalendarPage = () => {
         </section>
     )
 }
+
+export default CalendarPage
