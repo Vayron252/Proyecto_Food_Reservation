@@ -32,6 +32,7 @@ const HomePage = () => {
                             (<button className="anuncios__mostrarmas" onClick={handleShowMore}>
                                 <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
                             </button>)}
+                        {/* <p className="baaa"><i className="fa-solid fa-circle-chevron-down"></i> Mostrar más</p> */}
                     </div>
             </div>
             <div className="panel__recordatorio">

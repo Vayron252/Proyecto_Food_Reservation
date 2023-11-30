@@ -58,9 +58,11 @@
 .anuncios__mostrarmas {
     margin: 0 auto;
     display: block;
-    background-color: var(--colorBlanco);
+    /* background-color: var(--colorBlanco); */
+    background-color: transparent;
     outline: none;
-    border: .2rem solid var(--colorPrimario);
+    /* border: .2rem solid var(--colorPrimario); */
+    border: none;
     padding: 1rem 2.5rem;
     border-radius: 1rem;
     font-weight: 700;
