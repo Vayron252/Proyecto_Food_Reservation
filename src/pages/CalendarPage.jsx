@@ -15,6 +15,15 @@ const CalendarPage = () => {
     ]
 
     const handleClick = () => {
+        if(fecha === '') {
+            Swal.fire({
+                title: "Mensaje al usuario",
+                text: "Debe seleccionar una fecha.",
+                icon: "warning",
+                allowOutsideClick: false
+            });
+            return;
+        }
         if (daysLunch.includes(fecha)) {
             alert("Ya no más!!!");
             return;
@@ -30,21 +39,24 @@ const CalendarPage = () => {
           }).then((result) => {
             if (result.isConfirmed) {
                 setDaysLunch([...daysLunch, fecha]);
+                setFecha('');
                 Swal.fire({
                     title: "Reservado!",
                     text: "Se ha realizado tu reserva.",
-                    icon: "success"
+                    icon: "success",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    allowOutsideClick: false
                 });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                setFecha('');
             }
           });
     }
 
     return (
         <section className="seccion__calendario contenedor">
-            <button className="calendario__agregar" onClick={handleClick}>
-                <span>28</span>
-                <span>Nov</span>
-            </button>
+            <button className="calendario__reservar__boton" onClick={handleClick}>Reservar</button>
             <input type="text" onChange={e => setFecha(e.target.value)} value={fecha} />
             {meses.map((valor, index) => (
                 <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} />
