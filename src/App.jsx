@@ -28,10 +28,15 @@ const router = createBrowserRouter([
       {
         index: true,
         // lazy: () => import('./pages/HomePage')
+        // lazy: async () => {
+        //   let HomePage = await import("./pages/HomePage")
+        //   await wait(2000);
+        //   return { Component: HomePage.default }
+        // },
         // async lazy() {
-        //   const { HomePage } = await import("./pages/HomePage");
-        //   // await wait(10000);
-        //   return { Component: HomePage };
+        //   const HomePage = await import("./pages/HomePage");
+        //   await wait(10000);
+        //   return { Component: HomePage.default };
         // }
         element: <HomePage />
       },
