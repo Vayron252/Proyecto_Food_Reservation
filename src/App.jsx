@@ -1,24 +1,25 @@
 import React, { Suspense, lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-// import { HomePage } from './pages/HomePage'
-// import { CalendarPage } from './pages/CalendarPage'
-// import { FoodPage } from './pages/FoodPage'
-// import { ProfilePage } from './pages/ProfilePage'
-// import { PromotionPage } from './pages/PromotionPage'
 import { MainLayout } from './layouts/MainLayout';
 import { AppContextProvider } from './contexts/AppContext'
+import loadable from "@loadable/component";
+import { ChargingScreen } from './components/helpers/ChargingScreen'
 
-// const HomePage = () => lazy(() => import('./pages/HomePage'));
-// const HomePage = () => React.lazy(() => import('./pages/HomePage'))
-const HomePage = lazy(() => import('./pages/HomePage'));
-const CalendarPage = lazy(() => import('./pages/CalendarPage'));
-const FoodPage = lazy(() => import('./pages/FoodPage'));
-const ProfilePage = lazy(() => import('./pages/ProfilePage'));
-const PromotionPage = lazy(() => import('./pages/PromotionPage'));
-
-export async function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+const lazyComponent = (component) => {
+  return loadable(() => {
+    return Promise.all([
+      import(`./pages/${component}.jsx`),
+      new Promise(resolve => setTimeout(resolve, 1000))
+    ])
+    .then(([moduleExports]) => moduleExports);
+  })
 }
+
+const HomePage = lazyComponent('HomePage');
+const CalendarPage = lazyComponent('CalendarPage');
+const FoodPage = lazyComponent('FoodPage');
+const ProfilePage = lazyComponent('ProfilePage');
+const PromotionPage = lazyComponent('PromotionPage');
 
 const router = createBrowserRouter([
   {
@@ -27,50 +28,23 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        // lazy: () => import('./pages/HomePage')
-        // lazy: async () => {
-        //   let HomePage = await import("./pages/HomePage")
-        //   await wait(2000);
-        //   return { Component: HomePage.default }
-        // },
-        // async lazy() {
-        //   const HomePage = await import("./pages/HomePage");
-        //   await wait(10000);
-        //   return { Component: HomePage.default };
-        // }
-        element: <HomePage />
+        element: <HomePage fallback={<ChargingScreen />}/>
       },
       {
         path: "/calendario",
-        element: <CalendarPage />
-        // async lazy() {
-        //   const { CalendarPage } = await import("./pages/CalendarPage");
-        //   return { Component: CalendarPage };
-        // }
+        element: <CalendarPage fallback={<ChargingScreen />}/>
       },
       {
         path: "/productos/:categoria",
-        element: <FoodPage />
-        // async lazy() {
-        //   const { FoodPage } = await import("./pages/FoodPage");
-        //   return { Component: FoodPage };
-        // }
+        element: <FoodPage fallback={<ChargingScreen />}/>
       },
       {
         path: "/promociones",
-        element: <PromotionPage />
-        // async lazy() {
-        //   const { PromotionPage } = await import("./pages/PromotionPage");
-        //   return { Component: PromotionPage };
-        // }
+        element: <PromotionPage fallback={<ChargingScreen />}/>
       },
       {
         path: "/perfil",
-        element: <ProfilePage />
-        // async lazy() {
-        //   const { ProfilePage } = await import("./pages/ProfilePage");
-        //   return { Component: ProfilePage };
-        // }
+        element: <ProfilePage fallback={<ChargingScreen />}/>
       }
     ]
   },

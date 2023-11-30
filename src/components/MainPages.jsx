@@ -8,9 +8,7 @@ export const MainPages = () => {
     return (
         <main className="main">
             <div className="main__helper"></div>
-            <Suspense fallback={<ChargingScreen />}>
-                <Outlet />
-            </Suspense>
+            <Outlet />
         </main>
     )
 }
