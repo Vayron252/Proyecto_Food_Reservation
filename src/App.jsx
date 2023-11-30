@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react'
+import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { MainLayout } from './layouts/MainLayout';
 import { AppContextProvider } from './contexts/AppContext'
@@ -12,7 +12,9 @@ const lazyComponent = (component) => {
       new Promise(resolve => setTimeout(resolve, 1000))
     ])
     .then(([moduleExports]) => moduleExports);
-  })
+  }, {
+    fallback: <ChargingScreen />
+  });
 }
 
 const HomePage = lazyComponent('HomePage');
@@ -28,23 +30,23 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage fallback={<ChargingScreen />}/>
+        element: <HomePage />
       },
       {
         path: "/calendario",
-        element: <CalendarPage fallback={<ChargingScreen />}/>
+        element: <CalendarPage />
       },
       {
         path: "/productos/:categoria",
-        element: <FoodPage fallback={<ChargingScreen />}/>
+        element: <FoodPage />
       },
       {
         path: "/promociones",
-        element: <PromotionPage fallback={<ChargingScreen />}/>
+        element: <PromotionPage />
       },
       {
         path: "/perfil",
-        element: <ProfilePage fallback={<ChargingScreen />}/>
+        element: <ProfilePage />
       }
     ]
   },
