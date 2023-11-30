@@ -1,10 +1,10 @@
-import { SpinnerFoldingCube } from '../helpers/SpinnerFoldingCube'
+import { SpinnerSkCube } from './SpinnerSkCube'
 import '../../styles/helpers.css'
 
 export const ChargingScreen = () => {
   return (
     <div className="screen__loading">
-        <SpinnerFoldingCube />
+        <SpinnerSkCube />
     </div>
   )
 }

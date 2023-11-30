@@ -9,7 +9,7 @@ const lazyComponent = (component) => {
   return loadable(() => {
     return Promise.all([
       import(`./pages/${component}.jsx`),
-      new Promise(resolve => setTimeout(resolve, 1000))
+      new Promise(resolve => setTimeout(resolve, 1500))
     ])
     .then(([moduleExports]) => moduleExports);
   }, {
