@@ -7,12 +7,13 @@ const fechaDate = (month, year) => {
   return mydate;
 }
 
-export const Calendar = ({ month, year, daysLunch, setFecha }) => {
+export const Calendar = ({ month, year, daysLunch, setFecha, daySelect, setDaySelect }) => {
   const date = fechaDate(month, year);
   const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
   const [numbersDay, setNumbersDay] = useState([]);
   const [monthName, setMonthName] = useState('');
   const firstDayOfMonthRef = useRef(null);
+  
 
   // const daysLunch = ['02/11/2023','10/11/2023','20/11/2023'];
   
@@ -53,9 +54,13 @@ export const Calendar = ({ month, year, daysLunch, setFecha }) => {
   });
 
   const handleClickDay = (e) => {
+    if (daySelect !== null) {
+      daySelect.classList.remove('selecc');
+    }
+    e.target.classList.add('selecc');
     const fechaSeleccionada = e.target.getAttribute('data-fecha');
-    // alert(`Seleccionaste: ${fechaSeleccionada}`);
     setFecha(fechaSeleccionada);
+    setDaySelect(e.target);
   }
 
   return (
@@ -73,8 +78,12 @@ export const Calendar = ({ month, year, daysLunch, setFecha }) => {
           ))} */}
         {/* ref={ref => (refs.current[i] = ref)} */}
         {numbersDay.map((dayNumber, i) => (
-          <div ref={dayNumber.number === 1 ? firstDayOfMonthRef : null} onClick={handleClickDay} data-fecha={dayNumber.fecha} className="calendario__mes__dia" key={dayNumber.number}>
-            {dayNumber.number} {dayNumber.lunch && <div className="calendario__mes__dia__almuerzo"><i className="fa-solid fa-utensils"></i></div>}
+          <div ref={dayNumber.number === 1 ? firstDayOfMonthRef : null}
+            onClick={handleClickDay} data-fecha={dayNumber.fecha}
+            className="calendario__mes__dia"
+            key={dayNumber.number}>
+            {dayNumber.number} {dayNumber.lunch && <div className="calendario__mes__dia__almuerzo">
+              <i className="fa-solid fa-utensils"></i></div>}
           </div>
         ))}
       </div>

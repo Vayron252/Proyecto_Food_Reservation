@@ -30,14 +30,14 @@
     text-align: center;
     padding: 2rem 0;
     font-weight: 700;
-    color: #006666;
+    color: var(--colorPrimario);
     cursor: pointer;
     transition: all .2s;
     font-size: 1.2rem;
     position: relative;
 }
-.calendario__mes__dia:hover {
-    background-color: rgb(197, 174, 197);
+.calendario__mes__dia.selecc {
+    background-color: var(--colorSecundario);
     color: var(--colorBlanco);
 }
 .seccion__calendario {

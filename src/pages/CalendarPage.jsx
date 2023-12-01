@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { Calendar } from '../components/Calendar'
 import Swal from 'sweetalert2'
 import '../styles/pages.css'
+import icoreserva from '../img/ico_reserva.png'
 
 const CalendarPage = () => {
     const [daysLunch, setDaysLunch] = useState([]);
     const [fecha, setFecha] = useState('');
+    const [daySelect, setDaySelect] = useState(null);
 
     const meses = [
         {
@@ -40,6 +42,8 @@ const CalendarPage = () => {
             if (result.isConfirmed) {
                 setDaysLunch([...daysLunch, fecha]);
                 setFecha('');
+                daySelect.classList.remove('selecc');
+                setDaySelect(null);
                 Swal.fire({
                     title: "Reservado!",
                     text: "Se ha realizado tu reserva.",
@@ -56,10 +60,15 @@ const CalendarPage = () => {
 
     return (
         <section className="seccion__calendario contenedor">
-            <button className="calendario__reservar__boton" onClick={handleClick}>Reservar</button>
+            <button className="calendario__reservar__boton" onClick={handleClick}>
+                <div className="calendario__reservar__boton__contenedor__imagen">
+                    <img src={icoreserva} alt="imagen reserva" />
+                </div>
+                <span>Reservar</span>
+            </button>
             <input type="text" onChange={e => setFecha(e.target.value)} value={fecha} />
             {meses.map((valor, index) => (
-                <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} />
+                <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
             ))}
         </section>
     )

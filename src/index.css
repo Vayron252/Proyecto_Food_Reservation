@@ -2,8 +2,9 @@
 :root {
     --fuente-principal: 'Roboto', sans-serif;
     --colorPrimario: #153243;
-    --colorSecundario: #CCDAD1;
-    --colorTerciario: #f2ad5e;
+    --colorSecundario: #97aac8;
+    --colorTarjeta: #f4c9a3;
+    --colorFondo: #bbceed;
     --colorBlanco: #FFFFFF;
     --colorGris: #808080;
     --colorNegro: #000000;
@@ -26,7 +27,7 @@ img {
 }
 body {
     font-family: var(--fuente-principal);
-    background-color: var(--colorSecundario);
+    background-color: var(--colorFondo);
 }
 
 /* Utilitarios */
