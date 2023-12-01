@@ -71,6 +71,35 @@ const CalendarPage = () => {
 
     return (
         <section className="seccion__calendario contenedor">
+            <div className="calendario__opciones">
+                <h2 className="calendario__opciones__titulo">Menú de Opciones</h2>
+                <div className="calendario__opciones__contenido">
+                    <div className="calendario__opciones__opcion">
+                        <button className="calendario__opciones__boton">
+                            <i className="fa-regular fa-calendar-days"></i>
+                        </button>
+                        <p className="calendario__opciones__nombre">Preguntas Frecuentes</p>
+                    </div>
+                    <div className="calendario__opciones__opcion">
+                        <button className="calendario__opciones__boton">
+                            <i className="fa-regular fa-calendar-days"></i>
+                        </button>
+                        <p className="calendario__opciones__nombre">Opción 1</p>
+                    </div>
+                    <div className="calendario__opciones__opcion">
+                        <button className="calendario__opciones__boton">
+                            <i className="fa-regular fa-calendar-days"></i>
+                        </button>
+                        <p className="calendario__opciones__nombre">Ver Programación</p>
+                    </div>
+                    <div className="calendario__opciones__opcion">
+                        <button className="calendario__opciones__boton">
+                            <i className="fa-regular fa-calendar-days"></i>
+                        </button>
+                        <p className="calendario__opciones__nombre">Próx. Programación</p>
+                    </div>
+                </div>
+            </div>
             <div className="calendario__contenido">
                 <h2 className="calendario__contenido__titulo">Realiza tu Reserva</h2>
                 <button onClick={handleMesSiguiente}>Ir siguiente</button>

@@ -77,11 +77,49 @@
 /* .seccion__calendario {
     padding: 2rem 0;
 } */
+.calendario__opciones {
+    background-color: var(--colorBlanco);
+    margin-top: 1rem;
+    border-radius: 1rem;
+    padding: 1rem 0;
+}
+.calendario__opciones__titulo {
+    text-align: center;
+}
+.calendario__opciones__contenido {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+.calendario__opciones__opcion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.calendario__opciones__boton {
+    outline: none;
+    border: .2rem solid var(--colorPrimario);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: var(--colorBlanco);
+}
 .calendario__contenido {
     margin: 1rem 0;
     background-color: var(--colorBlanco);
     border-radius: 1rem;
-    padding: 1rem;
+    padding: 2rem 1rem;
+}
+.calendario__opciones__nombre {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--colorPrimario);
+    font-weight: 700;
+    min-height: 2rem;
+    width: 7rem;
 }
 .calendario__contenido__titulo {
     font-size: 2rem;

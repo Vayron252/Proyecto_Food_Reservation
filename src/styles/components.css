@@ -44,11 +44,6 @@
     background-color: var(--colorSecundario);
     color: var(--colorBlanco);
 }
-.seccion__calendario {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
 .calendario__mes__dia__almuerzo {
     position: absolute;
     right: .2rem;
