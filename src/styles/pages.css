@@ -78,11 +78,11 @@
     padding: 2rem 0;
 } */
 .calendario__opciones {
-    background-color: var(--colorTarjeta);
+    background-color: var(--colorBlanco);
     margin-top: 1rem;
     border-radius: 1rem;
     padding: 1rem 0;
-    border: .2rem solid var(--colorPrimario);
+    /* border: .2rem solid var(--colorPrimario); */
 }
 .calendario__opciones__titulo {
     text-align: center;
@@ -106,7 +106,7 @@
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
-    background-color: var(--colorBlanco);
+    background-color: #e0daf7;
 }
 .calendario__opciones__boton:hover {
     background-color: var(--colorPrimario);
@@ -173,6 +173,9 @@
 }
 .calendario__reservar__boton__contenedor__imagen {
     width: 3.5rem;
+}
+.seccion__calendario .calendario__mes {
+    margin-top: 2rem;
 }
 
 /* FoodPage */

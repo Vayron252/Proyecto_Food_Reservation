@@ -7,7 +7,7 @@ const fechaDate = (month, year) => {
   return mydate;
 }
 
-export const Calendar = ({ month, year, daysLunch, setFecha, daySelect, setDaySelect }) => {
+export const Calendar = ({ month, year, daysLunch, daySelect, setDaySelect }) => {
   const date = fechaDate(month, year);
   const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
   const [numbersDay, setNumbersDay] = useState([]);
@@ -58,8 +58,8 @@ export const Calendar = ({ month, year, daysLunch, setFecha, daySelect, setDaySe
       daySelect.classList.remove('selecc');
     }
     e.target.classList.add('selecc');
-    const fechaSeleccionada = e.target.getAttribute('data-fecha');
-    setFecha(fechaSeleccionada);
+    // const fechaSeleccionada = e.target.getAttribute('data-fecha');
+    // setFecha(fechaSeleccionada);
     setDaySelect(e.target);
   }
 
@@ -78,7 +78,7 @@ export const Calendar = ({ month, year, daysLunch, setFecha, daySelect, setDaySe
           ))} */}
         {/* ref={ref => (refs.current[i] = ref)} */}
         {numbersDay.map((dayNumber, i) => (
-          <div disabled="true" ref={dayNumber.number === 1 ? firstDayOfMonthRef : null}
+          <div ref={dayNumber.number === 1 ? firstDayOfMonthRef : null}
             onClick={handleClickDay} data-fecha={dayNumber.fecha}
             className="calendario__mes__dia"
             key={dayNumber.number}>

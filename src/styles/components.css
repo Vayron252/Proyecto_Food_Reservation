@@ -1,6 +1,7 @@
 /* Calendar */
 .calendario__mes {
-    border-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
     overflow: hidden;
 }
 .calendario__mes__nombre {
