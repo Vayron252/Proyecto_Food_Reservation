@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
-import '../styles/footer.css'
-import icohome from '../img/ico_home.png'
-import icocalendar from '../img/ico_calendar.png'
-import icolunch from '../img/ico_lunch.png'
-import icoprofile from '../img/ico_profile.png'
+import '../../styles/footer.css'
+import icohome from '../../img/ico_home.png'
+import icocalendar from '../../img/ico_calendar.png'
+import icolunch from '../../img/ico_lunch.png'
+import icoprofile from '../../img/ico_profile.png'
 
 export const MainFooter = () => {
     const location = useLocation();

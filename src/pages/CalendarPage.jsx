@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Calendar } from '../components/Calendar'
 import Swal from 'sweetalert2'
 import '../styles/pages.css'
 import icoreserva from '../img/ico_reserva.png'
 
 const CalendarPage = () => {
+    const navigate = useNavigate();
     const [daysLunch, setDaysLunch] = useState([]);
     const [fecha, setFecha] = useState('');
     const [daySelect, setDaySelect] = useState(null);
@@ -40,18 +42,19 @@ const CalendarPage = () => {
             allowOutsideClick: false
           }).then((result) => {
             if (result.isConfirmed) {
-                setDaysLunch([...daysLunch, fecha]);
-                setFecha('');
-                daySelect.classList.remove('selecc');
-                setDaySelect(null);
-                Swal.fire({
-                    title: "Reservado!",
-                    text: "Se ha realizado tu reserva.",
-                    icon: "success",
-                    timer: 2000,
-                    showConfirmButton: false,
-                    allowOutsideClick: false
-                });
+                navigate('/reserva/menu/01-12-2023');
+                // setDaysLunch([...daysLunch, fecha]);
+                // setFecha('');
+                // daySelect.classList.remove('selecc');
+                // setDaySelect(null);
+                // Swal.fire({
+                //     title: "Reservado!",
+                //     text: "Se ha realizado tu reserva.",
+                //     icon: "success",
+                //     timer: 2000,
+                //     showConfirmButton: false,
+                //     allowOutsideClick: false
+                // });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 setFecha('');
             }

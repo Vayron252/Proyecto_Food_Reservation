@@ -1,6 +1,6 @@
-import { MainFooter } from '../components/MainFooter'
-import { MainHeader } from '../components/MainHeader'
-import { MainPages } from '../components/MainPages'
+import { MainFooter } from '../components/footers/MainFooter'
+import { MainHeader } from '../components/headers/MainHeader'
+import { MainPages } from '../components/mains/MainPages'
 import { Sidebar } from '../components/Sidebar'
 import { ScrollToTop } from '../components/helpers/ScrollToTop'
 

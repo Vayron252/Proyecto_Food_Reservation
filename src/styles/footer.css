@@ -2,6 +2,7 @@
 
 /* MainFooter */
 .footer {
+    min-height: 7.5rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     position: fixed;

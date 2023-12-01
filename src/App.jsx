@@ -1,6 +1,7 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { MainLayout } from './layouts/MainLayout';
+import { ReservationLayout } from './layouts/ReservationLayout';
 import { AppContextProvider } from './contexts/AppContext'
 import loadable from "@loadable/component";
 import { ChargingScreen } from './components/helpers/ChargingScreen'
@@ -22,6 +23,7 @@ const CalendarPage = lazyComponent('CalendarPage');
 const FoodPage = lazyComponent('FoodPage');
 const ProfilePage = lazyComponent('ProfilePage');
 const PromotionPage = lazyComponent('PromotionPage');
+const ReservationPage = lazyComponent('ReservationPage');
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,16 @@ const router = createBrowserRouter([
       {
         path: "/perfil",
         element: <ProfilePage />
+      }
+    ]
+  },
+  {
+    path: "/reserva/:tipo/:date",
+    element: <ReservationLayout />,
+    children: [
+      {
+        index: true,
+        element: <ReservationPage />
       }
     ]
   },
