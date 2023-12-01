@@ -108,11 +108,11 @@
     border-radius: 50%;
     background-color: #e0daf7;
 }
-.calendario__opciones__boton:hover {
+.calendario__opciones__boton:active {
     background-color: var(--colorPrimario);
     border-color: var(--colorBlanco);
 }
-.calendario__opciones__boton:hover .calendario__opciones__boton__imagen {
+.calendario__opciones__boton:active .calendario__opciones__boton__imagen {
     color: var(--colorBlanco);
 }
 .calendario__opciones__boton__imagen {
