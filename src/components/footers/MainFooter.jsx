@@ -1,12 +1,15 @@
 import { Link, useLocation } from 'react-router-dom'
-import '../../styles/footer.css'
+import { getCurrentMonth, getCurrentYear } from '../../helpers/dateHelpers'
 import icohome from '../../img/ico_home.png'
 import icocalendar from '../../img/ico_calendar.png'
 import icolunch from '../../img/ico_lunch.png'
 import icoprofile from '../../img/ico_profile.png'
+import '../../styles/footer.css'
 
 export const MainFooter = () => {
     const location = useLocation();
+    const currentMonth = getCurrentMonth();
+    const currentYear = getCurrentYear();
 
     return (
         <footer className="footer">
@@ -20,8 +23,8 @@ export const MainFooter = () => {
                 <p className="footer__contenedor__link__nombre">Inicio</p>
             </Link>
             <Link 
-                className={`footer__contenedor__link ${location.pathname === '/calendario' ? 'active' : ''}`} 
-                to={"/calendario"}>
+                className={`footer__contenedor__link ${location.pathname === `/calendario/${currentMonth}/${currentYear}` ? 'active' : ''}`} 
+                to={`/calendario/${currentMonth}/${currentYear}`}>
                 {/* <i className="fa-solid fa-calendar-days footer__contenedor__link__imagen"></i> */}
                 <div className="footer__contenedor__link__imagen">
                     <img src={icocalendar} alt="icono calendario" />
