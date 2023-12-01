@@ -76,25 +76,25 @@ const CalendarPage = () => {
                 <div className="calendario__opciones__contenido">
                     <div className="calendario__opciones__opcion">
                         <button className="calendario__opciones__boton">
-                            <i className="fa-regular fa-calendar-days"></i>
+                            <i className="fa-solid fa-circle-question calendario__opciones__boton__imagen"></i>
                         </button>
                         <p className="calendario__opciones__nombre">Preguntas Frecuentes</p>
                     </div>
                     <div className="calendario__opciones__opcion">
                         <button className="calendario__opciones__boton">
-                            <i className="fa-regular fa-calendar-days"></i>
+                            <i className="fa-solid fa-table-list calendario__opciones__boton__imagen"></i>
                         </button>
-                        <p className="calendario__opciones__nombre">Opción 1</p>
+                        <p className="calendario__opciones__nombre">Ver Por Listado</p>
                     </div>
                     <div className="calendario__opciones__opcion">
                         <button className="calendario__opciones__boton">
-                            <i className="fa-regular fa-calendar-days"></i>
+                            <i className="fa-solid fa-eye calendario__opciones__boton__imagen"></i>
                         </button>
                         <p className="calendario__opciones__nombre">Ver Programación</p>
                     </div>
                     <div className="calendario__opciones__opcion">
                         <button className="calendario__opciones__boton">
-                            <i className="fa-regular fa-calendar-days"></i>
+                            <i className="fa-regular fa-calendar-days calendario__opciones__boton__imagen"></i>
                         </button>
                         <p className="calendario__opciones__nombre">Próx. Programación</p>
                     </div>

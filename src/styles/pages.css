@@ -78,10 +78,11 @@
     padding: 2rem 0;
 } */
 .calendario__opciones {
-    background-color: var(--colorBlanco);
+    background-color: var(--colorTarjeta);
     margin-top: 1rem;
     border-radius: 1rem;
     padding: 1rem 0;
+    border: .2rem solid var(--colorPrimario);
 }
 .calendario__opciones__titulo {
     text-align: center;
@@ -91,7 +92,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
 }
 .calendario__opciones__opcion {
     display: flex;
@@ -106,6 +107,17 @@
     height: 5rem;
     border-radius: 50%;
     background-color: var(--colorBlanco);
+}
+.calendario__opciones__boton:hover {
+    background-color: var(--colorPrimario);
+    border-color: var(--colorBlanco);
+}
+.calendario__opciones__boton:hover .calendario__opciones__boton__imagen {
+    color: var(--colorBlanco);
+}
+.calendario__opciones__boton__imagen {
+    color: var(--colorPrimario);
+    font-size: 2rem;
 }
 .calendario__contenido {
     margin: 1rem 0;
