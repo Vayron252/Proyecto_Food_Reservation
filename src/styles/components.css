@@ -1,4 +1,8 @@
 /* Calendar */
+.calendario__mes {
+    border-radius: 1rem;
+    overflow: hidden;
+}
 .calendario__mes__nombre {
     background-color: rgb(203, 179, 226);
     color: var(--colorBlanco);

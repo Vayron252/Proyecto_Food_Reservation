@@ -78,7 +78,7 @@ export const Calendar = ({ month, year, daysLunch, setFecha, daySelect, setDaySe
           ))} */}
         {/* ref={ref => (refs.current[i] = ref)} */}
         {numbersDay.map((dayNumber, i) => (
-          <div ref={dayNumber.number === 1 ? firstDayOfMonthRef : null}
+          <div disabled="true" ref={dayNumber.number === 1 ? firstDayOfMonthRef : null}
             onClick={handleClickDay} data-fecha={dayNumber.fecha}
             className="calendario__mes__dia"
             key={dayNumber.number}>

@@ -71,19 +71,21 @@ const CalendarPage = () => {
 
     return (
         <section className="seccion__calendario contenedor">
-            <h2 className="">Realiza tu Reserva</h2>
-            <button onClick={handleMesSiguiente}>Ir siguiente</button>
-            <button className="calendario__reservar__boton" onClick={handleClick}>
-                <div className="calendario__reservar__boton__contenedor__imagen">
-                    <img src={icoreserva} alt="imagen reserva" />
-                </div>
-                <span>Reservar</span>
-            </button>
-            <input type="text" onChange={e => setFecha(e.target.value)} value={fecha} />
-            {/* {meses.map((valor, index) => (
-                <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
-            ))} */}
-            <Calendar month={month} year={year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
+            <div className="calendario__contenido">
+                <h2 className="calendario__contenido__titulo">Realiza tu Reserva</h2>
+                <button onClick={handleMesSiguiente}>Ir siguiente</button>
+                <button className="calendario__reservar__boton" onClick={handleClick}>
+                    <div className="calendario__reservar__boton__contenedor__imagen">
+                        <img src={icoreserva} alt="imagen reserva" />
+                    </div>
+                    <span>Reservar</span>
+                </button>
+                <input type="text" onChange={e => setFecha(e.target.value)} value={fecha} />
+                {/* {meses.map((valor, index) => (
+                    <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
+                ))} */}
+                <Calendar month={month} year={year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
+            </div>
         </section>
     )
 }
