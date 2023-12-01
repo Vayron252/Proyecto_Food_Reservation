@@ -17,7 +17,6 @@ const HomePage = () => {
 
     return (
         <section className="seccion__anuncios__comunidad contenedor">
-            <button>Helloo</button>
             <div className="panel__anuncios">
                 <div className="anuncios__busqueda">
                     <input className="anuncios__busqueda__entrada" type="text" placeholder="Hola Marco Alarcón, ¿qué publicación estás buscando?" />
