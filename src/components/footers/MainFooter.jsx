@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { getCurrentMonth, getCurrentYear } from '../../helpers/dateHelpers'
+import { getCurrentMonth, getCurrentYear, getNameMonthShort } from '../../helpers/dateHelpers'
 import icohome from '../../img/ico_home.png'
 import icocalendar from '../../img/ico_calendar.png'
 import icolunch from '../../img/ico_lunch.png'
@@ -10,6 +10,7 @@ export const MainFooter = () => {
     const location = useLocation();
     const currentMonth = getCurrentMonth();
     const currentYear = getCurrentYear();
+    const month_year = `${getNameMonthShort()}${currentYear}`;
 
     return (
         <footer className="footer">
@@ -29,7 +30,7 @@ export const MainFooter = () => {
                 <div className="footer__contenedor__link__imagen">
                     <img src={icocalendar} alt="icono calendario" />
                 </div>
-                <p className="footer__contenedor__link__nombre">Calendario</p>
+                <p className="footer__contenedor__link__nombre">{`${month_year}`}</p>
             </Link>
             <Link 
                 className={`footer__contenedor__link ${location.pathname === '/productos/almuerzos' ? 'active' : ''}`} 

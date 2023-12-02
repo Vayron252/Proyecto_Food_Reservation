@@ -41,6 +41,11 @@
     font-size: 1.2rem;
     position: relative;
 }
+.calendario__mes__dia[disabled] {
+    pointer-events: none;
+    opacity: 0.7;
+    background-color: var(--colorGris);
+}
 .calendario__mes__dia.selecc {
     background-color: var(--colorSecundario);
     color: var(--colorBlanco);

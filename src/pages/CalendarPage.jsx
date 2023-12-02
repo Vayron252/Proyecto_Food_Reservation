@@ -15,7 +15,7 @@ const CalendarPage = () => {
 
     useEffect(() => {
         if (daySelect) {
-            setFecha(daySelect.getAttribute('data-fecha'));
+            setFecha(daySelect.getAttribute('data-date'));
         }
     }, [daySelect])
     
@@ -119,14 +119,6 @@ const CalendarPage = () => {
                     <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
                 ))} */}
                 <Calendar month={month} year={year} daysLunch={daysLunch} daySelect={daySelect} setDaySelect={setDaySelect} />
-                <p>Mas Contenido</p>
-                <p>Mas Contenido</p>
-                <p>Mas Contenido</p>
-                <p>Mas Contenido</p>
-                <p>Mas Contenido</p>
-                <p>Mas Contenido</p>
-                <p>Mas Contenido</p>
-                <p>Mas Contenido</p>
             </div>
         </section>
     )
