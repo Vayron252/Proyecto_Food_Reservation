@@ -3,13 +3,14 @@ import { useApp } from '../hooks/useApp'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock'
 import { useScreenSize } from '../hooks/useScreenSize'
-import '../styles/components.css'
+import { getCurrentMonth, getCurrentYear, getNameMonthShort } from '../helpers/dateHelpers'
 import icohome from '../img/ico_home.png'
 import icocalendar from '../img/ico_calendar.png'
 import icopromotion from '../img/ico_promotion.png'
 import icoproducts from '../img/ico_products.png'
 import icoprofile from '../img/ico_profile.png'
 import { Logo } from './Logo'
+import '../styles/components.css'
 
 export const Sidebar = () => {
     const navigate = useNavigate();
@@ -17,6 +18,10 @@ export const Sidebar = () => {
     const { width } = useScreenSize();
     const { openSidebar, handleOpenOrCloseSidebar } = useApp();
     const { toggleBodyScroll }  = useBodyScrollLock();
+
+    const currentMonth = getCurrentMonth();
+    const currentYear = getCurrentYear();
+    const month_year = `${getNameMonthShort()}${currentYear}`;
 
     const handleCloseMenuBar = () => {
         if (width >= 992) {
@@ -63,13 +68,13 @@ export const Sidebar = () => {
                             <p className="sidebar__links__item__nombre">Inicio</p>
                         </li>
                         <li
-                            className={`sidebar__links__item ${location.pathname === '/calendario' ? 'active' : ''}`}
-                            onClick={() => handleNavigateLink("/calendario")}>
+                            className={`sidebar__links__item ${location.pathname === `/calendario/${currentMonth}/${currentYear}` ? 'active' : ''}`}
+                            onClick={() => handleNavigateLink(`/calendario/${currentMonth}/${currentYear}`)}>
                             {/* <i className="fa-solid fa-calendar-days sidebar__links__item__imagen"></i> */}
                             <div className="sidebar__links__item__imagen">
                                 <img src={icocalendar} alt="icono calendario" />
                             </div>
-                            <p className="sidebar__links__item__nombre">Calendario</p>
+                            <p className="sidebar__links__item__nombre">{`${month_year}`}</p>
                         </li>
                         <li
                             className={`sidebar__links__item ${location.pathname === '/productos/almuerzos' ? 'active' : ''}`}

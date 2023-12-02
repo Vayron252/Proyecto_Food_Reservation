@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Calendar } from '../components/Calendar'
-import { getCurrentMonth, getCurrentYear } from '../helpers/dateHelpers'
+import { getFullDate, getNameMonthLong, getCurrentDate } from '../helpers/dateHelpers'
 import Swal from 'sweetalert2'
 import '../styles/pages.css'
 import icoreserva from '../img/ico_reserva.png'
@@ -12,19 +12,39 @@ const CalendarPage = () => {
     const [daysLunch, setDaysLunch] = useState([]);
     const [fecha, setFecha] = useState('');
     const [daySelect, setDaySelect] = useState(null);
+    const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
+
+    useEffect(() => {
+        const yearReal = getCurrentDate().getFullYear();
+        const monthReal = getCurrentDate().getMonth() + 1;
+        if (yearReal !== parseInt(year) && monthReal !== parseInt(month)) {
+            setIsDisabledNewProgramation(true);
+            return;
+        }
+        setIsDisabledNewProgramation(false);
+    }, [month, year])
 
     useEffect(() => {
         if (daySelect) {
             setFecha(daySelect.getAttribute('data-date'));
         }
     }, [daySelect])
-    
+
     // const meses = [
     //     {
     //         month: 11,
     //         year: 2023
     //     }
     // ]
+
+    // const isDisabledNewProgramation = () => {
+    //     const yearReal = getCurrentDate().getFullYear();
+    //     const monthReal = getCurrentDate().getMonth() + 1;
+    //     if (yearReal === parseInt(year) && monthReal === parseInt(month)) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
     const handleClick = () => {
         if(fecha === '') {
@@ -48,7 +68,7 @@ const CalendarPage = () => {
             confirmButtonText: "Si, Reservar!",
             cancelButtonText: "Cancelar",
             allowOutsideClick: false
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 navigate('/reserva/menu/01-12-2023');
                 // setDaysLunch([...daysLunch, fecha]);
@@ -68,11 +88,47 @@ const CalendarPage = () => {
                 daySelect.classList.remove('selecc');
                 setDaySelect(null);
             }
-          });
+        });
     }
 
     const handleNewCalendarReserve = () => {
-        navigate('/calendario/1/2024')
+        const programationLunch = {
+            codigo: 1,
+            nombre: "Programación Marzo 2024",
+            mes: 2,
+            anio: 2024,
+            fecinicio: '02/12/2023',
+            fecfin: '23/02/2024'
+        };
+        // const programationLunch = {};
+
+        if (Object.keys(programationLunch).length <= 0) {
+            Swal.fire({
+                title: "Error!",
+                text: "No se ha encontrado una programación activa.",
+                icon: "error",
+                showConfirmButton: true,
+                allowOutsideClick: false
+            });
+            return;
+        }
+
+        const date = getFullDate(programationLunch.anio, programationLunch.mes, 1);
+        const nameMonth = getNameMonthLong(date);
+
+        Swal.fire({
+            title: `¿Desea realizar la reserva para ${nameMonth} - ${programationLunch.anio}?`,
+            text: "",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Si, Realizar!",
+            cancelButtonText: "Cancelar",
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate(`/calendario/${programationLunch.mes}/${programationLunch.anio}`);
+            }
+        });
     }
 
     return (
@@ -99,7 +155,7 @@ const CalendarPage = () => {
                         <p className="calendario__opciones__nombre">Ver Programación</p>
                     </div>
                     <div className="calendario__opciones__opcion">
-                        <button className="calendario__opciones__boton" onClick={handleNewCalendarReserve}>
+                        <button disabled={isDisabledNewProgramation} className="calendario__opciones__boton" onClick={handleNewCalendarReserve}>
                             <i className="fa-regular fa-calendar-days calendario__opciones__boton__imagen"></i>
                         </button>
                         <p className="calendario__opciones__nombre">Próx. Programación</p>

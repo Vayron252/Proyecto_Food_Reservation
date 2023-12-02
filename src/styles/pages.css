@@ -86,6 +86,8 @@
 }
 .calendario__opciones__titulo {
     text-align: center;
+    font-size: 1.5rem;
+    text-transform: uppercase;
 }
 .calendario__opciones__contenido {
     margin-top: 1rem;
@@ -107,6 +109,12 @@
     height: 5rem;
     border-radius: 50%;
     background-color: #e0daf7;
+    cursor: pointer;
+}
+.calendario__opciones__boton[disabled] {
+    pointer-events: none;
+    opacity: 0.7;
+    background-color: var(--colorGris);
 }
 .calendario__opciones__boton:active {
     background-color: var(--colorPrimario);
