@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Calendar } from '../components/Calendar'
 import { getFullDate, getNameMonthLong, getCurrentDate } from '../helpers/dateHelpers'
+import { getProgramation } from '../data/foodAPI'
+import icoreserva from '../img/ico_reserva.png'
 import Swal from 'sweetalert2'
 import '../styles/pages.css'
-import icoreserva from '../img/ico_reserva.png'
 
 const CalendarPage = () => {
     const { month, year } = useParams();
@@ -92,6 +93,7 @@ const CalendarPage = () => {
     }
 
     const handleNewCalendarReserve = () => {
+        getProgramation();
         const programationLunch = {
             codigo: 1,
             nombre: "Programación Marzo 2024",
