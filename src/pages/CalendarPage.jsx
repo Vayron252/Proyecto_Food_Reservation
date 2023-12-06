@@ -16,7 +16,7 @@ const CalendarPage = () => {
     const [daySelect, setDaySelect] = useState(null);
     const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    
     useEffect(() => {
         const yearReal = getCurrentDate().getFullYear();
         const monthReal = getCurrentDate().getMonth() + 1;
@@ -94,6 +94,50 @@ const CalendarPage = () => {
         });
     }
 
+    const handleTest = () => {
+        let programationLunch;
+        Swal.fire({
+            title: "Programaciones activas",
+            text: "Obteniendo datos...",
+            allowOutsideClick: false,
+            didOpen: async () => {
+                Swal.showLoading();
+                programationLunch = await getNewProgramation();
+                Swal.clickConfirm();
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (Object.keys(programationLunch).length <= 0) {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "No se ha encontrado una programación activa.",
+                        icon: "error",
+                        showConfirmButton: true,
+                        allowOutsideClick: false
+                    });
+                    return;
+                }
+
+                const date = getFullDate(programationLunch.anio, programationLunch.mes, 1);
+                const nameMonth = getNameMonthLong(date);
+
+                Swal.fire({
+                    title: `¿Desea realizar la reserva para ${nameMonth} - ${programationLunch.anio}?`,
+                    text: "",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "Si, Realizar!",
+                    cancelButtonText: "Cancelar",
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate(`/calendario/${programationLunch.mes}/${programationLunch.anio}`);
+                    }
+                });
+            }
+        });
+    }
+
     const handleNewCalendarReserve = async () => {
         setLoading(true);
         const programationLunch = await getNewProgramation();
@@ -146,7 +190,7 @@ const CalendarPage = () => {
                         <p className="calendario__opciones__nombre">Ver Por Listado</p>
                     </div>
                     <div className="calendario__opciones__opcion">
-                        <button className="calendario__opciones__boton">
+                        <button className="calendario__opciones__boton" onClick={handleTest}>
                             <i className="fa-solid fa-eye calendario__opciones__boton__imagen"></i>
                         </button>
                         <p className="calendario__opciones__nombre">Ver Programación</p>
@@ -173,8 +217,8 @@ const CalendarPage = () => {
                 </button>
                 {/* <input type="text" onChange={e => setFecha(e.target.value)} value={fecha} /> */}
                 {/* {meses.map((valor, index) => (
-                    <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
-                ))} */}
+                        <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
+                    ))} */}
                 <Calendar month={month} year={year} daysLunch={daysLunch} daySelect={daySelect} setDaySelect={setDaySelect} />
             </div>
         </section>
