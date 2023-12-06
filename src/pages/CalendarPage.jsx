@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Calendar } from '../components/Calendar'
+import { SpinnerSkCircle } from '../components/helpers/SpinnerSkCircle'
 import { getFullDate, getNameMonthLong, getCurrentDate } from '../helpers/dateHelpers'
-import { getProgramation } from '../data/foodAPI'
+import { getNewProgramation } from '../data/foodAPI'
 import icoreserva from '../img/ico_reserva.png'
 import Swal from 'sweetalert2'
 import '../styles/pages.css'
@@ -14,6 +15,7 @@ const CalendarPage = () => {
     const [fecha, setFecha] = useState('');
     const [daySelect, setDaySelect] = useState(null);
     const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const yearReal = getCurrentDate().getFullYear();
@@ -92,19 +94,12 @@ const CalendarPage = () => {
         });
     }
 
-    const handleNewCalendarReserve = () => {
-        getProgramation();
-        const programationLunch = {
-            codigo: 1,
-            nombre: "Programación Marzo 2024",
-            mes: 2,
-            anio: 2024,
-            fecinicio: '02/12/2023',
-            fecfin: '23/02/2024'
-        };
-        // const programationLunch = {};
-
+    const handleNewCalendarReserve = async () => {
+        setLoading(true);
+        const programationLunch = await getNewProgramation();
+        setLoading(false);        
         if (Object.keys(programationLunch).length <= 0) {
+            setLoading(false);
             Swal.fire({
                 title: "Error!",
                 text: "No se ha encontrado una programación activa.",
@@ -157,10 +152,14 @@ const CalendarPage = () => {
                         <p className="calendario__opciones__nombre">Ver Programación</p>
                     </div>
                     <div className="calendario__opciones__opcion">
-                        <button disabled={isDisabledNewProgramation} className="calendario__opciones__boton" onClick={handleNewCalendarReserve}>
-                            <i className="fa-regular fa-calendar-days calendario__opciones__boton__imagen"></i>
-                        </button>
-                        <p className="calendario__opciones__nombre">Próx. Programación</p>
+                        {loading ? (<SpinnerSkCircle />) : (
+                            <>
+                                <button disabled={isDisabledNewProgramation} className="calendario__opciones__boton" onClick={handleNewCalendarReserve}>
+                                    <i className="fa-regular fa-calendar-days calendario__opciones__boton__imagen"></i>
+                                </button>
+                                <p className="calendario__opciones__nombre">Próx. Programación</p>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
