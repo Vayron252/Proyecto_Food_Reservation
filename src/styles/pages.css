@@ -271,3 +271,34 @@
 .seccion__productos .swiper-slide {
     border-radius: 1.5rem;
 }
+
+/* PublicationPage */
+/* .seccion__publicacion {
+    padding: 2rem 0;
+} */
+.publicacion__contenido {
+    margin: 1rem 0;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--colorBlanco);
+}
+.publicacion__titulo {
+    color: var(--colorPrimario);
+    text-align: center;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.publicacion__informacion {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.publicacion__imagen__contenedor {
+    margin: 0 auto;
+}
+.publicacion__descripcion {
+    font-size: 1.4rem;
+    text-align: justify;
+    padding: 0 1rem;
+}
