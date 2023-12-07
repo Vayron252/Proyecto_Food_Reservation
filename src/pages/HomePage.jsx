@@ -53,7 +53,6 @@ const HomePage = () => {
 
     const renderListPublications = (data) => {
         useEffect(() => {
-            console.log(data);
           setAnnouncements(data);
         }, [])
         

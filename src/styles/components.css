@@ -278,6 +278,18 @@
     object-fit: cover;
     object-position: center center;
 }
+.anuncio__contenido {
+    margin-top: .5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.anuncio__contenido__item__descripcion {
+    font-size: 1.3rem;
+}
+.anuncio__contenido__item__descripcion__etiqueta {
+    font-weight: 700;
+    color: var(--colorPrimario);
+}
 .anuncio__descripcion {
     margin-top: 1rem;
     font-size: 1.4rem;

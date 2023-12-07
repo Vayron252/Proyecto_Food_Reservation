@@ -6,6 +6,7 @@ import { AppContextProvider } from './contexts/AppContext'
 import loadable from "@loadable/component";
 import { ChargingScreen } from './components/helpers/ChargingScreen'
 import { loaderHome } from './pages/HomePage';
+import { loaderPublication } from './pages/PublicationPage';
 
 const lazyComponent = (component) => {
   return loadable(() => {
@@ -25,6 +26,7 @@ const FoodPage = lazyComponent('FoodPage');
 const ProfilePage = lazyComponent('ProfilePage');
 const PromotionPage = lazyComponent('PromotionPage');
 const ReservationPage = lazyComponent('ReservationPage');
+const PublicationPage = lazyComponent('PublicationPage');
 
 const router = createBrowserRouter([
   {
@@ -51,6 +53,11 @@ const router = createBrowserRouter([
       {
         path: "/perfil",
         element: <ProfilePage />
+      },
+      {
+        path: "/publicacion/:id",
+        element: <PublicationPage />,
+        loader: loaderPublication
       }
     ]
   },
