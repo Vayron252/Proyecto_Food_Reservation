@@ -3,38 +3,77 @@ import { Await, defer, useLoaderData } from 'react-router-dom'
 import { getNewPublications } from '../data/foodAPI'
 import { SpinnerCircle } from '../components/helpers/SpinnerCircle'
 import { AnnouncementCard } from '../components/AnnouncementCard'
-import '../styles/pages.css'
 import { useEffect } from 'react'
-
-export const loaderHome = () => {
-    const publications = getNewPublications();
-    return defer({
-        data: publications
-    })
-}
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import '../styles/pages.css'
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+export const loaderHome = () => {
+    const publications = getNewPublications(1);
+    return defer({
+        data: delay(3000).then(() => publications)
+        // data: publications
+    })
+}
+
+const AnnuncementCardSkeleton = () => {
+    return (
+        <div className="anuncios__contenedor">
+            <article className="anuncio">
+                <div className="anuncio__contenedor__imagen">
+                    <Skeleton height={320} />
+                </div>
+                <Skeleton count={7} />
+            </article>
+            <article className="anuncio">
+                <div className="anuncio__contenedor__imagen">
+                    <Skeleton height={320} />
+                </div>
+                <Skeleton count={7} />
+            </article>
+        </div>
+    )
+}
+
 const HomePage = () => {
     const { data } = useLoaderData();
-
     const [loading, setLoading] = useState(false);
     const [announcements, setAnnouncements] = useState([]);
+    const [page, setPage] = useState(2);
 
-    const handleShowMore = () => {
+    const handleShowMore = async () => {
         setLoading(true);
-        setTimeout(() => {
-            setAnnouncements([...announcements, 1, 1, 1, 1]);
-            setLoading(false);
-        }, 2000);
+        const newPublications = await getNewPublications(page);
+        setAnnouncements([...announcements, ...newPublications]);
+        setPage(page + 1);
+        setLoading(false);
     }
 
-    const handleJaa = async () => {
-        // console.log(data);
-        // setAnnouncements();
-        const resultado = await data;
-        console.log(resultado);
-        await setAnnouncements(resultado)
+    const renderListPublications = (data) => {
+        useEffect(() => {
+            console.log(data);
+          setAnnouncements(data);
+        }, [])
+        
+        return (
+            <>
+                <div className="anuncios__contenedor">
+                    {announcements.map(announcement => (
+                        <AnnouncementCard 
+                            key={announcement.id} announcement={announcement} />
+                    ))}
+                </div>
+                <div className="anuncios__contenedor__mostrarmas">
+                    {loading ? (<SpinnerCircle />) :
+                        (<button className="anuncios__mostrarmas"
+                            onClick={handleShowMore}>
+                            <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
+                        </button>)}
+                </div>
+            </>
+        )
     }
     
     return (
@@ -44,20 +83,9 @@ const HomePage = () => {
                     <input className="anuncios__busqueda__entrada" type="text" placeholder="Hola Marco Alarcón, ¿qué publicación estás buscando?" />
                     <i className="fa-solid fa-magnifying-glass anuncios__busqueda__imagen"></i>
                 </div>
-                <Suspense fallback={<p>Cargandoooo....</p>}>
+                <Suspense fallback={<AnnuncementCardSkeleton />}>
                     <Await resolve={data}>
-                        <div className="anuncios__contenedor">
-                            {announcements.map((announcement, index) => (
-                                <AnnouncementCard key={index} />
-                            ))}
-                        </div>
-                        <div className="anuncios__contenedor__mostrarmas">
-                            {loading ? (<SpinnerCircle />) :
-                                (<button className="anuncios__mostrarmas" onClick={handleShowMore}>
-                                    <i className="fa-solid fa-circle-chevron-down anuncios__mostrarmas__imagen"></i> Mostrar Más
-                                </button>)}
-                            {/* <p className="baaa"><i className="fa-solid fa-circle-chevron-down"></i> Mostrar más</p> */}
-                        </div>
+                        {(resolvedData) => renderListPublications(resolvedData)}
                     </Await>
                 </Suspense>
             </div>

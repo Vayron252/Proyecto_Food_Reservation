@@ -4,8 +4,8 @@ export const getNewProgramation = async () => {
     return result;
 }
 
-export const getNewPublications = async () => {
-    const response = await fetch('http://localhost:3000/publicaciones');
+export const getNewPublications = async (page) => {
+    const response = await fetch(`https://apitestprueba-4fg7.onrender.com/publicaciones?_page=${page}&_limit=2`);
     const result = await response.json();
     return result;
 }
