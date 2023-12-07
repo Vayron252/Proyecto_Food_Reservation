@@ -5,6 +5,7 @@ import { ReservationLayout } from './layouts/ReservationLayout';
 import { AppContextProvider } from './contexts/AppContext'
 import loadable from "@loadable/component";
 import { ChargingScreen } from './components/helpers/ChargingScreen'
+import { loaderHome } from './pages/HomePage';
 
 const lazyComponent = (component) => {
   return loadable(() => {
@@ -32,7 +33,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />
+        element: <HomePage />,
+        loader: loaderHome
       },
       {
         path: "/calendario/:month/:year",
