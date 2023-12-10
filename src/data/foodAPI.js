@@ -15,3 +15,9 @@ export const getPublication = async (id) => {
     const result = await response.json();
     return result;
 }
+
+export const getLunch = async () => {
+    const response = await fetch(`http://localhost:3000/reservas`);
+    const result = await response.json();
+    return result;
+}

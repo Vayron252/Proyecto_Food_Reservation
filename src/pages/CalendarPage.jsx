@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLoaderData } from 'react-router-dom'
 import { Calendar } from '../components/Calendar'
 import { SpinnerSkCircle } from '../components/helpers/SpinnerSkCircle'
 import { getFullDate, getNameMonthLong, getCurrentDate, getCurrentMonth, getCurrentYear, getLastDayOfMonth } from '../helpers/dateHelpers'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { getNewProgramation } from '../data/foodAPI'
+import { getNewProgramation, getLunch } from '../data/foodAPI'
 import icoreserva from '../img/ico_reserva.png'
 import Swal from 'sweetalert2'
 import 'swiper/css'
 import '../styles/pages.css'
 
+export const loaderCalendar = async () => {
+    const daysReserve = await getLunch();
+    return {
+        daysReserve
+    }
+}
+
 const CalendarPage = () => {
+    const { daysReserve } = useLoaderData();
     // const { month, year } = useParams();
     const firstDayCurrent = getFullDate(getCurrentYear(), getCurrentMonth(), 1);
     const navigate = useNavigate();
@@ -19,7 +27,7 @@ const CalendarPage = () => {
     const [daySelect, setDaySelect] = useState(null);
     const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [calendarShow, setCalendarShow] = useState([{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear()}]);
+    const [calendarShow, setCalendarShow] = useState([{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear() }]);
     
     // useEffect(() => {
     //     const yearReal = getCurrentDate().getFullYear();
@@ -32,11 +40,17 @@ const CalendarPage = () => {
     // }, [month, year])
 
     useEffect(() => {
-      const lastDayCurrent = getFullDate(firstDayCurrent.getFullYear(), firstDayCurrent.getMonth() + 1, getLastDayOfMonth(firstDayCurrent));
-      const firstDayNext = new Date(lastDayCurrent);
-      firstDayNext.setDate(firstDayNext.getDate() + 1);
-    //   const lastDayNext = getFullDate(firstDayNext.getFullYear(), firstDayNext.getMonth() + 1, getLastDayOfMonth(firstDayNext));
-      setCalendarShow([...calendarShow, { mes: firstDayNext.getMonth() + 1, anio: firstDayNext.getFullYear() }]);
+      let lastDay = getFullDate(firstDayCurrent.getFullYear(), firstDayCurrent.getMonth() + 1, getLastDayOfMonth(firstDayCurrent));
+      let contador = 1, months = [];
+      while (contador < 2) {
+        const firstDayNext = new Date(lastDay);
+        firstDayNext.setDate(firstDayNext.getDate() + 1);
+        months.push({ mes: firstDayNext.getMonth() + 1, anio: firstDayNext.getFullYear() });
+        lastDay = getFullDate(firstDayNext.getFullYear(), firstDayNext.getMonth() + 1, getLastDayOfMonth(firstDayNext));
+        contador++;
+      }
+      setCalendarShow([...calendarShow, ...months]);
+      setDaysLunch(daysReserve);
     }, [])
 
     useEffect(() => {
@@ -232,8 +246,8 @@ const CalendarPage = () => {
                         <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
                     ))} */}
                 <Swiper spaceBetween={20}>
-                    {calendarShow.map(calendar => (
-                        <SwiperSlide key={calendar.anio+calendar.mes}>
+                    {calendarShow.map((calendar, index) => (
+                        <SwiperSlide key={index}>
                             <Calendar
                                 month={calendar.mes} year={calendar.anio} daysLunch={daysLunch} 
                                 daySelect={daySelect} setDaySelect={setDaySelect} />

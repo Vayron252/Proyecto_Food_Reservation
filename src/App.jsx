@@ -7,6 +7,7 @@ import loadable from "@loadable/component";
 import { ChargingScreen } from './components/helpers/ChargingScreen'
 import { loaderHome } from './pages/HomePage';
 import { loaderPublication } from './pages/PublicationPage';
+import { loaderCalendar } from './pages/CalendarPage';
 
 const lazyComponent = (component) => {
   return loadable(() => {
@@ -44,7 +45,8 @@ const router = createBrowserRouter([
       // },
       {
         path: "/calendario",
-        element: <CalendarPage />
+        element: <CalendarPage />,
+        loader: loaderCalendar
       },
       {
         path: "/productos/:categoria",

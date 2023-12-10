@@ -38,7 +38,10 @@ export const Calendar = ({ month, year, daysLunch, daySelect, setDaySelect }) =>
     let counter = 1;
     while (counter <= lastDayOfMonth) {
       const dateFormater = `${counter.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`
-      const day = { 
+      const today = getFullDate(year, month, getCurrentDate().getDate());
+      const dayFormat = getFullDate(year, month, counter);
+      const day = {
+        today: dayFormat.toString() === today.toString() ? true : false, 
         number: counter, 
         date: dateFormater, 
         lunch: daysLunch.includes(dateFormater),
@@ -97,8 +100,9 @@ export const Calendar = ({ month, year, daysLunch, daySelect, setDaySelect }) =>
             onClick={handleClickDay} data-date={dayNumber.date}
             className="calendario__mes__dia"
             key={dayNumber.number}>
-            {dayNumber.number} {dayNumber.lunch && <div className="calendario__mes__dia__almuerzo">
-              <i className="fa-solid fa-utensils"></i></div>}
+            {dayNumber.number} 
+            {dayNumber.lunch && <div className="calendario__mes__dia__almuerzo"><i className="fa-solid fa-utensils"></i></div>}
+            {dayNumber.today && <div className="calendario__mes__dia__hoy"></div>}
           </div>
         ))}
       </div>

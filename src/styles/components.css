@@ -59,6 +59,15 @@
     background-color: cadetblue;
     color: var(--colorBlanco);
 }
+.calendario__mes__dia__hoy {
+    position: absolute;
+    top: .2rem;
+    left: .2rem;
+    background-color: var(--colorSecundario);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+}
 
 /* Sidebar */
 .sidebar__helper {
