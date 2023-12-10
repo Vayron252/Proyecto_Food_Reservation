@@ -68,8 +68,8 @@ export const Sidebar = () => {
                             <p className="sidebar__links__item__nombre">Inicio</p>
                         </li>
                         <li
-                            className={`sidebar__links__item ${location.pathname === `/calendario/${currentMonth}/${currentYear}` ? 'active' : ''}`}
-                            onClick={() => handleNavigateLink(`/calendario/${currentMonth}/${currentYear}`)}>
+                            className={`sidebar__links__item ${location.pathname === '/calendario' ? 'active' : ''}`}
+                            onClick={() => handleNavigateLink('/calendario')}>
                             {/* <i className="fa-solid fa-calendar-days sidebar__links__item__imagen"></i> */}
                             <div className="sidebar__links__item__imagen">
                                 <img src={icocalendar} alt="icono calendario" />

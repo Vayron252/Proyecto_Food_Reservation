@@ -2,30 +2,42 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Calendar } from '../components/Calendar'
 import { SpinnerSkCircle } from '../components/helpers/SpinnerSkCircle'
-import { getFullDate, getNameMonthLong, getCurrentDate } from '../helpers/dateHelpers'
+import { getFullDate, getNameMonthLong, getCurrentDate, getCurrentMonth, getCurrentYear, getLastDayOfMonth } from '../helpers/dateHelpers'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { getNewProgramation } from '../data/foodAPI'
 import icoreserva from '../img/ico_reserva.png'
 import Swal from 'sweetalert2'
+import 'swiper/css'
 import '../styles/pages.css'
 
 const CalendarPage = () => {
-    const { month, year } = useParams();
+    // const { month, year } = useParams();
+    const firstDayCurrent = getFullDate(getCurrentYear(), getCurrentMonth(), 1);
     const navigate = useNavigate();
     const [daysLunch, setDaysLunch] = useState([]);
     const [fecha, setFecha] = useState('');
     const [daySelect, setDaySelect] = useState(null);
     const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [calendarShow, setCalendarShow] = useState([{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear()}]);
     
+    // useEffect(() => {
+    //     const yearReal = getCurrentDate().getFullYear();
+    //     const monthReal = getCurrentDate().getMonth() + 1;
+    //     if (yearReal !== parseInt(year) && monthReal !== parseInt(month)) {
+    //         setIsDisabledNewProgramation(true);
+    //         return;
+    //     }
+    //     setIsDisabledNewProgramation(false);
+    // }, [month, year])
+
     useEffect(() => {
-        const yearReal = getCurrentDate().getFullYear();
-        const monthReal = getCurrentDate().getMonth() + 1;
-        if (yearReal !== parseInt(year) && monthReal !== parseInt(month)) {
-            setIsDisabledNewProgramation(true);
-            return;
-        }
-        setIsDisabledNewProgramation(false);
-    }, [month, year])
+      const lastDayCurrent = getFullDate(firstDayCurrent.getFullYear(), firstDayCurrent.getMonth() + 1, getLastDayOfMonth(firstDayCurrent));
+      const firstDayNext = new Date(lastDayCurrent);
+      firstDayNext.setDate(firstDayNext.getDate() + 1);
+    //   const lastDayNext = getFullDate(firstDayNext.getFullYear(), firstDayNext.getMonth() + 1, getLastDayOfMonth(firstDayNext));
+      setCalendarShow([...calendarShow, { mes: firstDayNext.getMonth() + 1, anio: firstDayNext.getFullYear() }]);
+    }, [])
 
     useEffect(() => {
         if (daySelect) {
@@ -219,7 +231,15 @@ const CalendarPage = () => {
                 {/* {meses.map((valor, index) => (
                         <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
                     ))} */}
-                <Calendar month={month} year={year} daysLunch={daysLunch} daySelect={daySelect} setDaySelect={setDaySelect} />
+                <Swiper spaceBetween={20}>
+                    {calendarShow.map(calendar => (
+                        <SwiperSlide key={calendar.anio+calendar.mes}>
+                            <Calendar
+                                month={calendar.mes} year={calendar.anio} daysLunch={daysLunch} 
+                                daySelect={daySelect} setDaySelect={setDaySelect} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
             </div>
         </section>
     )
