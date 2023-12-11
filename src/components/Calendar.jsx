@@ -1,33 +1,35 @@
 import { useEffect, useState, useRef, useLayoutEffect } from "react"
-import { getNameMonthLong, getFullDate, getLastDayOfMonth, getCurrentDate } from '../helpers/dateHelpers'
+import { getNameMonthLong, getFullDate, getLastDayOfMonth, getFormatDateSlash } from '../helpers/dateHelpers'
 import '../styles/components.css'
 
-export const Calendar = ({ month, year, daysLunch, daySelect, setDaySelect }) => {
+export const Calendar = ({ month, year, today, daysLunch, daySelect, setDaySelect, programation }) => {
   const date = getFullDate(year, month, 1);
   const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
   const monthName = getNameMonthLong(date);
 
   const [numbersDay, setNumbersDay] = useState([]);
   const firstDayOfMonthRef = useRef(null);
-
-  // const daysLunch = ['02/11/2023','10/11/2023','20/11/2023'];
   
-  // const [date, setDate] = useState(fechaDate(month, year));
   // const refs = useRef([]);
-
-  const isDisabledDate = (day) => {
-    const yearReal = getCurrentDate().getFullYear();
-    const monthReal = getCurrentDate().getMonth() + 1;
-    if (yearReal === parseInt(year) && monthReal === parseInt(month)) {
-      const today = getFullDate(year, month, getCurrentDate().getDate());
-      const dateFormat = getFullDate(year, month, day);
-      if (dateFormat < today) {
-        return true;
+  const isDisabledDay = (dayCalendar) => {
+    let validations = [];
+    programation.forEach(prog => {
+      const { fecinicio, fecfin } = prog;
+      const finicial = getFullDate(fecinicio.split('/')[2], fecinicio.split('/')[1], fecinicio.split('/')[0]);
+      const ffinal = getFullDate(fecfin.split('/')[2], fecfin.split('/')[1], fecfin.split('/')[0]);
+      if (dayCalendar >= finicial && dayCalendar <= ffinal) {
+        validations.push(false);
+      } else {
+        validations.push(true);
       }
-      return false;
-    } else {
-      return false;
-    }
+    });
+    const resultValidation = validations.some(val => !val);
+    // if (!resultValid) {
+    //   if (dayCalendar < today) {
+    //     return true;
+    //   }
+    // }
+    return !resultValidation;
   }
 
   const initializeCalendar = () => {
@@ -37,15 +39,15 @@ export const Calendar = ({ month, year, daysLunch, daySelect, setDaySelect }) =>
     let days = [];
     let counter = 1;
     while (counter <= lastDayOfMonth) {
-      const dateFormater = `${counter.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`
-      const today = getFullDate(year, month, getCurrentDate().getDate());
-      const dayFormat = getFullDate(year, month, counter);
+      const dateFormater = getFormatDateSlash(year, month, counter);
+      const dayCalendar = getFullDate(year, month, counter);
       const day = {
-        today: dayFormat.toString() === today.toString() ? true : false, 
+        today: dayCalendar.getTime() === today.getTime() ? true : false, 
         number: counter, 
         date: dateFormater, 
         lunch: daysLunch.includes(dateFormater),
-        disabled: isDisabledDate(counter)
+        // disabled: dayCalendar < today ? true : false
+        disabled: isDisabledDay(dayCalendar)
       }
       days.push(day);
       counter++;

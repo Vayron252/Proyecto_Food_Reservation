@@ -1,9 +1,3 @@
-export const getNewProgramation = async () => {
-    const response = await fetch('https://apitestprueba-4fg7.onrender.com/programaciones');
-    const result = await response.json();
-    return result;
-}
-
 export const getNewPublications = async (page) => {
     const response = await fetch(`https://apitestprueba-4fg7.onrender.com/publicaciones?_page=${page}&_limit=2`);
     const result = await response.json();
@@ -17,7 +11,13 @@ export const getPublication = async (id) => {
 }
 
 export const getLunch = async () => {
-    const response = await fetch(`http://localhost:3000/reservas`);
+    const response = await fetch(`https://apitestprueba-4fg7.onrender.com/reservas`);
+    const result = await response.json();
+    return result;
+}
+
+export const getNewProgramation = async () => {
+    const response = await fetch('https://apitestprueba-4fg7.onrender.com/programaciones');
     const result = await response.json();
     return result;
 }

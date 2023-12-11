@@ -8,6 +8,11 @@ export const getCurrentMonth = () => {
     return fechaHoy.getMonth() + 1;
 }
 
+export const getCurrentDay = () => {
+    const fechaHoy = getCurrentDate();
+    return fechaHoy.getDate();
+}
+
 export const getCurrentYear = () => {
     const fechaHoy = getCurrentDate();
     return fechaHoy.getFullYear();
@@ -20,6 +25,10 @@ export const getNameMonthShort = () => {
 
 export const getNameMonthLong = (date) => {
     return date.toLocaleString('es-PE', { month: 'long' });
+}
+
+export const getFormatDateSlash = (year, month, day) => {
+    return `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`
 }
 
 export const getFullDate = (year, month, day) => {
