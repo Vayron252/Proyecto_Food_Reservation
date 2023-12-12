@@ -185,6 +185,16 @@
 .seccion__calendario .calendario__mes {
     margin-top: 2rem;
 }
+.contenedor__spinner__calendario {
+    margin-top: 3rem;
+}
+.spinner__calendario__texto {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--colorPrimario);
+    margin-top: 2rem;
+}
 
 /* FoodPage */
 .seccion__productos {

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams, useLoaderData } from 'react-router-dom'
+import { Suspense, useEffect, useState } from 'react'
+import { useNavigate, useParams, useLoaderData, defer, Await } from 'react-router-dom'
 import { Calendar } from '../components/Calendar'
 import { SpinnerSkCircle } from '../components/helpers/SpinnerSkCircle'
+import { SpinnerCircle } from '../components/helpers/SpinnerCircle'
 import { getFullDate, getNameMonthLong, getCurrentDate, 
          getCurrentMonth, getCurrentYear, getCurrentDay, getLastDayOfMonth } from '../helpers/dateHelpers'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -11,17 +12,26 @@ import Swal from 'sweetalert2'
 import 'swiper/css'
 import '../styles/pages.css'
 
-export const loaderCalendar = async () => {
-    const daysReserve = await getLunch();
-    const newProgramation = await getNewProgramation();
-    return {
-        daysReserve,
-        newProgramation
-    }
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export const loaderCalendar = () => {
+    // const daysReserve = await getLunch();
+    // const newProgramation = await getNewProgramation();
+    // const [daysReserve, newProgramation] = Promise.all([
+    //     getLunch(), getNewProgramation()
+    // ])
+    // console.log(daysReserve)
+    return defer({
+        data: {
+            daysReserve: delay(3000).then(() => getLunch()),
+            newProgramation: getNewProgramation()
+        }
+    })
 }
 
 const CalendarPage = () => {
-    const { daysReserve, newProgramation } = useLoaderData();
+    // const { daysReserve, newProgramation } = useLoaderData();
+    const { data } = useLoaderData();
     const firstDayCurrent = getFullDate(getCurrentYear(), getCurrentMonth(), 1);
     const today = getFullDate(getCurrentYear(), getCurrentMonth(), getCurrentDay());
     const navigate = useNavigate();
@@ -43,7 +53,7 @@ const CalendarPage = () => {
         contador++;
       }
       setCalendarShow([...calendarShow, ...months]);
-      setDaysLunch(daysReserve);
+    //   setDaysLunch(daysReserve);
     }, [])
 
     useEffect(() => {
@@ -175,6 +185,38 @@ const CalendarPage = () => {
         });
     }
 
+    const CalendarSpinner = () => {
+        return (
+            <div className="contenedor__spinner__calendario">
+                <SpinnerSkCircle />
+                <p className="spinner__calendario__texto">Obteniendo datos del calendario...</p>
+            </div>
+        )
+    }
+
+    const renderCalendars = (data) => {
+        const [ daysReserve, newProgramation ] = data;
+
+        useEffect(() => {
+          setDaysLunch(daysReserve);
+        }, [])
+        
+        return (
+            <>
+                <Swiper spaceBetween={20}>
+                    {calendarShow.map((calendar, index) => (
+                        <SwiperSlide key={index}>
+                            <Calendar
+                                today={today} programation={newProgramation}
+                                month={calendar.mes} year={calendar.anio} daysLunch={daysLunch} 
+                                daySelect={daySelect} setDaySelect={setDaySelect} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </>
+        )
+    }
+
     return (
         <section className="seccion__calendario contenedor">
             <div className="calendario__opciones">
@@ -222,7 +264,7 @@ const CalendarPage = () => {
                 {/* {meses.map((valor, index) => (
                         <Calendar key={index} month={valor.month} year={valor.year} daysLunch={daysLunch} setFecha={setFecha} daySelect={daySelect} setDaySelect={setDaySelect} />
                     ))} */}
-                <Swiper spaceBetween={20}>
+                {/* <Swiper spaceBetween={20}>
                     {calendarShow.map((calendar, index) => (
                         <SwiperSlide key={index}>
                             <Calendar
@@ -231,7 +273,12 @@ const CalendarPage = () => {
                                 daySelect={daySelect} setDaySelect={setDaySelect} />
                         </SwiperSlide>
                     ))}
-                </Swiper>
+                </Swiper> */}
+                <Suspense fallback={<CalendarSpinner />}>
+                    <Await resolve={Promise.all([data.daysReserve, data.newProgramation]).then(value => value)}>
+                        {(resolvedData) => renderCalendars(resolvedData)}
+                    </Await>
+                </Suspense>
             </div>
         </section>
     )
