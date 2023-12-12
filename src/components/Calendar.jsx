@@ -2,7 +2,9 @@ import { useEffect, useState, useRef, useLayoutEffect } from "react"
 import { getNameMonthLong, getFullDate, getLastDayOfMonth, getFormatDateSlash } from '../helpers/dateHelpers'
 import '../styles/components.css'
 
-export const Calendar = ({ month, year, today, daysLunch, daySelect, setDaySelect, programation }) => {
+export const Calendar = ({ month, year, today, daysLunch, 
+  // daySelect, setDaySelect, 
+  programation, handleSelectDay }) => {
   const date = getFullDate(year, month, 1);
   const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
   const monthName = getNameMonthLong(date);
@@ -73,15 +75,15 @@ export const Calendar = ({ month, year, today, daysLunch, daySelect, setDaySelec
     }
   });
 
-  const handleClickDay = (e) => {
-    if (daySelect !== null) {
-      daySelect.classList.remove('selecc');
-    }
-    e.target.classList.add('selecc');
-    // const fechaSeleccionada = e.target.getAttribute('data-fecha');
-    // setFecha(fechaSeleccionada);
-    setDaySelect(e.target);
-  }
+  // const handleClickDay = (e) => {
+  //   if (daySelect !== null) {
+  //     daySelect.classList.remove('selecc');
+  //   }
+  //   e.target.classList.add('selecc');
+  //   // const fechaSeleccionada = e.target.getAttribute('data-fecha');
+  //   // setFecha(fechaSeleccionada);
+  //   setDaySelect(e.target);
+  // }
 
   return (
     <div className="calendario__mes">
@@ -99,7 +101,7 @@ export const Calendar = ({ month, year, today, daysLunch, daySelect, setDaySelec
         {/* ref={ref => (refs.current[i] = ref)} */}
         {numbersDay.map((dayNumber, i) => (
           <div disabled={dayNumber.disabled} ref={dayNumber.number === 1 ? firstDayOfMonthRef : null}
-            onClick={handleClickDay} data-date={dayNumber.date}
+            onClick={e => handleSelectDay(e)} data-date={dayNumber.date}
             className="calendario__mes__dia"
             key={dayNumber.number}>
             {dayNumber.number} 

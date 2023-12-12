@@ -32,12 +32,13 @@ export const loaderCalendar = () => {
 const CalendarPage = () => {
     // const { daysReserve, newProgramation } = useLoaderData();
     const { data } = useLoaderData();
+    let fecha = "", daySelect = null;
     const firstDayCurrent = getFullDate(getCurrentYear(), getCurrentMonth(), 1);
     const today = getFullDate(getCurrentYear(), getCurrentMonth(), getCurrentDay());
     const navigate = useNavigate();
     const [daysLunch, setDaysLunch] = useState([]);
-    const [fecha, setFecha] = useState('');
-    const [daySelect, setDaySelect] = useState(null);
+    // const [fecha, setFecha] = useState('');
+    // const [daySelect, setDaySelect] = useState(null);
     const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
     const [loading, setLoading] = useState(false);
     const [calendarShow, setCalendarShow] = useState([{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear() }]);
@@ -56,11 +57,23 @@ const CalendarPage = () => {
     //   setDaysLunch(daysReserve);
     }, [])
 
-    useEffect(() => {
-        if (daySelect) {
-            setFecha(daySelect.getAttribute('data-date'));
+    // useEffect(() => {
+    //     if (daySelect) {
+    //         setFecha(daySelect.getAttribute('data-date'));
+    //     }
+    // }, [daySelect])
+
+    const handleSelectDay = (element) => {
+        if (daySelect !== null) {
+            daySelect.classList.remove('selecc');
         }
-    }, [daySelect])
+        element.target.classList.add('selecc');
+        //   const fechaSeleccionada = e.target.getAttribute('data-fecha');
+        //   setFecha(fechaSeleccionada);
+        //setDaySelect(element.target);
+        daySelect = element.target;
+        fecha = daySelect.getAttribute('data-date');
+    }
 
     const handleClick = () => {
         if(fecha === '') {
@@ -73,7 +86,18 @@ const CalendarPage = () => {
             return;
         }
         if (daysLunch.includes(fecha)) {
-            alert("Ya no más!!!");
+            Swal.fire({
+                title: "Mensaje al usuario",
+                text: "La fecha seleccionada ya tiene una reserva.",
+                icon: "info",
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fecha = "";
+                    daySelect.classList.remove('selecc');
+                    daySelect = null; 
+                }
+            });
             return;
         }
         Swal.fire({
@@ -100,9 +124,9 @@ const CalendarPage = () => {
                 //     allowOutsideClick: false
                 // });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                setFecha('');
+                fecha = "";
                 daySelect.classList.remove('selecc');
-                setDaySelect(null);
+                daySelect = null;
             }
         });
     }
@@ -209,7 +233,8 @@ const CalendarPage = () => {
                             <Calendar
                                 today={today} programation={newProgramation}
                                 month={calendar.mes} year={calendar.anio} daysLunch={daysLunch} 
-                                daySelect={daySelect} setDaySelect={setDaySelect} />
+                                // daySelect={daySelect} setDaySelect={setDaySelect} 
+                                handleSelectDay={handleSelectDay} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
