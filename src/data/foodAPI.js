@@ -23,7 +23,7 @@ export const getNewProgramation = async () => {
 }
 
 export const getProgramationFood = async (fecha) => {
-    const response = await fetch('http://localhost:3000/programacion_almuerzo');
+    const response = await fetch('https://apitestprueba-4fg7.onrender.com/programacion_almuerzo');
     const result = await response.json();
     return result;
 }
