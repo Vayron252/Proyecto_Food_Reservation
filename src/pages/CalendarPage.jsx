@@ -14,7 +14,7 @@ import '../styles/pages.css'
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const loaderCalendar = () => {
+export const loaderCalendar = async () => {
     // const daysReserve = await getLunch();
     // const newProgramation = await getNewProgramation();
     // const [daysReserve, newProgramation] = Promise.all([

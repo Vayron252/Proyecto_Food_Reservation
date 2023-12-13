@@ -86,9 +86,18 @@
     font-weight: 700;
     color: var(--colorPrimario);
 }
-
 .header__atras__boton {
     color: var(--colorBlanco);
     font-size: 3.2rem;
     cursor: pointer;
+}
+.header__contenido__reserva {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+.header__fechareserva {
+    font-size: 2rem;
+    color: var(--colorBlanco);
+    font-weight: 700;
 }

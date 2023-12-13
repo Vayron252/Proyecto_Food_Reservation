@@ -10,11 +10,11 @@ import '../styles/pages.css'
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const loaderHome = () => {
+export const loaderHome = async () => {
     const publications = getNewPublications(1);
     return defer({
-        data: delay(3000).then(() => publications)
-        // data: publications
+        // data: delay(3000).then(() => publications)
+        data: publications
     })
 }
 

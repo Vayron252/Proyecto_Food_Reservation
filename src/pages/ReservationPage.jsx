@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useParams } from 'react-router-dom'
 import { getProgramationFood } from '../data/foodAPI'
 import { ProductCard } from '../components/ProductCard'
 import '../styles/pages.css'
@@ -11,6 +11,7 @@ export const loaderReservationPage = async ({ params }) => {
 const ReservationPage = () => {
   const { data } = useLoaderData();
   const { menu } = data[0];
+  const { date, tipo } = useParams();
 
   return (
     <section className="seccion__reserva contenedor">

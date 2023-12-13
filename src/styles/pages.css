@@ -359,8 +359,8 @@
     border-color: var(--colorPrimario);
 }
 .producto__contenedor__imagen {
-    width: 15rem;
-    height: 15rem;
+    width: 13rem;
+    height: 13rem;
     overflow: hidden;
     margin: 0 auto;
 }

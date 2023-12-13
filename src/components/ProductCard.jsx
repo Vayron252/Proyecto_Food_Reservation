@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import vasomaracuya from '../img/vaso_maracuya.png'
+import { useApp } from '../hooks/useApp';
 
 export const ProductCard = ({ product }) => {
     const { idproducto, nomproducto, imgproducto, catproducto } = product;
     const [productSelec, setProductSelec] = useState(false);
+    const { getProductInReserve } = useApp();
 
     const handleSelec = () => {
-        setProductSelec(!productSelec)
+        // setProductSelec(!productSelec)
+        const product = getProductInReserve(catproducto);
+        console.log(product);
     }
 
     return (
