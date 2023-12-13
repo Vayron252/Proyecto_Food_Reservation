@@ -59,9 +59,9 @@ export const Calendar = ({ month, year, today, daysLunch,
     // console.log(refs.current);
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     initializeCalendar();
-  }, [month, year, daysLunch])
+  }, [month, year])
 
   useLayoutEffect(() => {
     // console.log(refs.current);

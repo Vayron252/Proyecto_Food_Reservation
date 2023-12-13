@@ -8,6 +8,7 @@ import { ChargingScreen } from './components/helpers/ChargingScreen'
 import { loaderHome } from './pages/HomePage';
 import { loaderPublication } from './pages/PublicationPage';
 import { loaderCalendar } from './pages/CalendarPage';
+import { loaderReservationPage } from './pages/ReservationPage';
 
 const lazyComponent = (component) => {
   return loadable(() => {
@@ -73,7 +74,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ReservationPage />
+        element: <ReservationPage />,
+        loader: loaderReservationPage
       }
     ]
   },

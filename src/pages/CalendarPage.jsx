@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useState, useLayoutEffect } from 'react'
 import { useNavigate, useParams, useLoaderData, defer, Await } from 'react-router-dom'
 import { Calendar } from '../components/Calendar'
 import { SpinnerSkCircle } from '../components/helpers/SpinnerSkCircle'
@@ -23,7 +23,7 @@ export const loaderCalendar = () => {
     // console.log(daysReserve)
     return defer({
         data: {
-            daysReserve: delay(3000).then(() => getLunch()),
+            daysReserve: getLunch(),
             newProgramation: getNewProgramation()
         }
     })
@@ -34,6 +34,7 @@ const CalendarPage = () => {
     const { data } = useLoaderData();
     let fecha = "", daySelect = null;
     const firstDayCurrent = getFullDate(getCurrentYear(), getCurrentMonth(), 1);
+    // let calendarShow = [{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear() }];
     const today = getFullDate(getCurrentYear(), getCurrentMonth(), getCurrentDay());
     const navigate = useNavigate();
     const [daysLunch, setDaysLunch] = useState([]);
@@ -42,10 +43,11 @@ const CalendarPage = () => {
     const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
     const [loading, setLoading] = useState(false);
     const [calendarShow, setCalendarShow] = useState([{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear() }]);
-
+    
     useEffect(() => {
       let lastDay = getFullDate(firstDayCurrent.getFullYear(), firstDayCurrent.getMonth() + 1, getLastDayOfMonth(firstDayCurrent));
-      let contador = 1, months = [];
+      let contador = 1;
+      let months = [];
       while (contador < 2) {
         const firstDayNext = new Date(lastDay);
         firstDayNext.setDate(firstDayNext.getDate() + 1);
@@ -53,6 +55,7 @@ const CalendarPage = () => {
         lastDay = getFullDate(firstDayNext.getFullYear(), firstDayNext.getMonth() + 1, getLastDayOfMonth(firstDayNext));
         contador++;
       }
+    //   console.log(calendarShow);
       setCalendarShow([...calendarShow, ...months]);
     //   setDaysLunch(daysReserve);
     }, [])
@@ -110,7 +113,7 @@ const CalendarPage = () => {
             allowOutsideClick: false
         }).then((result) => {
             if (result.isConfirmed) {
-                navigate('/reserva/menu/01-12-2023');
+                navigate(`/reserva/menu/${fecha.replaceAll('/','-')}`);
                 // setDaysLunch([...daysLunch, fecha]);
                 // setFecha('');
                 // daySelect.classList.remove('selecc');
@@ -213,7 +216,7 @@ const CalendarPage = () => {
         return (
             <div className="contenedor__spinner__calendario">
                 <SpinnerSkCircle />
-                <p className="spinner__calendario__texto">Obteniendo datos del calendario...</p>
+                <p className="spinner__calendario__texto">Obteniendo datos de las reservas...</p>
             </div>
         )
     }
@@ -221,9 +224,13 @@ const CalendarPage = () => {
     const renderCalendars = (data) => {
         const [ daysReserve, newProgramation ] = data;
 
-        useEffect(() => {
-          setDaysLunch(daysReserve);
-        }, [])
+        // useEffect(() => {
+          
+        // }, [])
+
+        useLayoutEffect(() => {
+            setDaysLunch(daysReserve);
+        }, []);
         
         return (
             <>
@@ -244,7 +251,7 @@ const CalendarPage = () => {
 
     return (
         <section className="seccion__calendario contenedor">
-            <div className="calendario__opciones">
+            {/* <div className="calendario__opciones">
                 <h2 className="calendario__opciones__titulo">Menú de Opciones</h2>
                 <div className="calendario__opciones__contenido">
                     <div className="calendario__opciones__opcion">
@@ -276,7 +283,7 @@ const CalendarPage = () => {
                         )}
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="calendario__contenido">
                 <h2 className="calendario__contenido__titulo">Realiza tu Reserva</h2>
                 <button className="calendario__reservar__boton" onClick={handleClick}>

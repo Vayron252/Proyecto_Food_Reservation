@@ -21,3 +21,9 @@ export const getNewProgramation = async () => {
     const result = await response.json();
     return result;
 }
+
+export const getProgramationFood = async (fecha) => {
+    const response = await fetch('http://localhost:3000/programacion_almuerzo');
+    const result = await response.json();
+    return result;
+}

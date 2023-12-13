@@ -10,7 +10,8 @@ export const ReservationHeader = () => {
 
   return (
     <div className="header">
-      <button className="" onClick={handleBackPage}>Atras</button>
+      {/* <button className="" onClick={handleBackPage}></button> */}
+      <i className="fa-solid fa-circle-chevron-left header__atras__boton" onClick={handleBackPage}></i>
     </div>
   )
 }

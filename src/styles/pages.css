@@ -142,10 +142,10 @@
     width: 7rem;
 }
 .calendario__contenido__titulo {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--colorPrimario);
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 900;
     text-align: center;
 }
 .calendario__reservar__boton {
@@ -188,9 +188,13 @@
 .contenedor__spinner__calendario {
     margin-top: 3rem;
 }
+.contenedor__spinner__calendario .sk-circle {
+    width: 6rem;
+    height: 6rem;
+}
 .spinner__calendario__texto {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--colorPrimario);
     margin-top: 2rem;
@@ -311,4 +315,65 @@
     font-size: 1.4rem;
     text-align: justify;
     padding: 0 1rem;
+}
+
+/* ReservationPage */
+/* .seccion__reserva {
+    background-color: green;
+} */
+.reserva__contenido {
+    margin: 1rem 0;
+    background-color: rgb(240, 239, 239);
+    border-radius: 1rem;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.reserva__producto {
+    background-color: rgb(211, 179, 179);
+    border-radius: 2rem;
+    padding: 1rem 0;
+}
+.reserva__producto__titulo {
+    text-transform: uppercase;
+    color: var(--colorPrimario);
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+.producto__seccion {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 1rem;
+    gap: 1rem;
+    padding: 1rem;
+}
+.producto {
+    padding: 1rem;
+    cursor: pointer;
+    border: .2rem solid rgb(211, 179, 179);
+    border-radius: 2rem;
+}
+.producto.activo {
+    border-color: var(--colorPrimario);
+}
+.producto__contenedor__imagen {
+    width: 15rem;
+    height: 15rem;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.producto__imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+.producto__nombre {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--colorPrimario);
 }
