@@ -12,16 +12,20 @@ export const useApp = () => {
     }
 
     const handleSaveReserve = async () => {
-        fetch('https://apitestprueba-4fg7.onrender.com/reservas', {
+        const response = await fetch('https://apitestprueba-4fg7.onrender.com/reservas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ fecha: reserve.date })
         })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .then(setReserve({}))
-        .then(navigate('/calendario'))
-        .catch(error => console.error(error));
+        const result = await response.json();
+        console.log(result);
+        setReserve({})
+        navigate('/calendario')
+        // .then(response => response.json())
+        // .then(data => console.log(data))
+        // .then(setReserve({}))
+        // .then(navigate('/calendario'))
+        // .catch(error => console.error(error));
     }
     
     const handleAddProductInReserve = (type, product, date) => {
