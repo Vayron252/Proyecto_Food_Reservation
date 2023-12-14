@@ -32,16 +32,16 @@ export const loaderCalendar = async () => {
 const CalendarPage = () => {
     // const { daysReserve, newProgramation } = useLoaderData();
     const { data } = useLoaderData();
-    let fecha = "", daySelect = null;
+    let fecha = "", daySelect = null, daysLunch = [];
     const firstDayCurrent = getFullDate(getCurrentYear(), getCurrentMonth(), 1);
     // let calendarShow = [{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear() }];
     const today = getFullDate(getCurrentYear(), getCurrentMonth(), getCurrentDay());
     const navigate = useNavigate();
-    const [daysLunch, setDaysLunch] = useState([]);
+    // const [daysLunch, setDaysLunch] = useState([]);
     // const [fecha, setFecha] = useState('');
     // const [daySelect, setDaySelect] = useState(null);
-    const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
-    const [loading, setLoading] = useState(false);
+    // const [isDisabledNewProgramation, setIsDisabledNewProgramation] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [calendarShow, setCalendarShow] = useState([{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear() }]);
     
     useEffect(() => {
@@ -179,39 +179,39 @@ const CalendarPage = () => {
         });
     }
 
-    const handleNewCalendarReserve = async () => {
-        setLoading(true);
-        const programationLunch = await getNewProgramation();
-        setLoading(false);        
-        if (Object.keys(programationLunch).length <= 0) {
-            setLoading(false);
-            Swal.fire({
-                title: "Error!",
-                text: "No se ha encontrado una programación activa.",
-                icon: "error",
-                showConfirmButton: true,
-                allowOutsideClick: false
-            });
-            return;
-        }
+    // const handleNewCalendarReserve = async () => {
+    //     setLoading(true);
+    //     const programationLunch = await getNewProgramation();
+    //     setLoading(false);        
+    //     if (Object.keys(programationLunch).length <= 0) {
+    //         setLoading(false);
+    //         Swal.fire({
+    //             title: "Error!",
+    //             text: "No se ha encontrado una programación activa.",
+    //             icon: "error",
+    //             showConfirmButton: true,
+    //             allowOutsideClick: false
+    //         });
+    //         return;
+    //     }
 
-        const date = getFullDate(programationLunch.anio, programationLunch.mes, 1);
-        const nameMonth = getNameMonthLong(date);
+    //     const date = getFullDate(programationLunch.anio, programationLunch.mes, 1);
+    //     const nameMonth = getNameMonthLong(date);
 
-        Swal.fire({
-            title: `¿Desea realizar la reserva para ${nameMonth} - ${programationLunch.anio}?`,
-            text: "",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Si, Realizar!",
-            cancelButtonText: "Cancelar",
-            allowOutsideClick: false
-        }).then((result) => {
-            if (result.isConfirmed) {
-                navigate(`/calendario/${programationLunch.mes}/${programationLunch.anio}`);
-            }
-        });
-    }
+    //     Swal.fire({
+    //         title: `¿Desea realizar la reserva para ${nameMonth} - ${programationLunch.anio}?`,
+    //         text: "",
+    //         icon: "question",
+    //         showCancelButton: true,
+    //         confirmButtonText: "Si, Realizar!",
+    //         cancelButtonText: "Cancelar",
+    //         allowOutsideClick: false
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             navigate(`/calendario/${programationLunch.mes}/${programationLunch.anio}`);
+    //         }
+    //     });
+    // }
 
     const CalendarSpinner = () => {
         return (
@@ -224,14 +224,15 @@ const CalendarPage = () => {
 
     const renderCalendars = (data) => {
         const [ daysReserve, newProgramation ] = data;
+        daysLunch = daysReserve;
 
         // useEffect(() => {
           
         // }, [])
 
-        useLayoutEffect(() => {
-            setDaysLunch(daysReserve);
-        }, []);
+        // useLayoutEffect(() => {
+        //     setDaysLunch(daysReserve);
+        // }, []);
         
         return (
             <>
