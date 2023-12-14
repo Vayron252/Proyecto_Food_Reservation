@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { useApp } from '../hooks/useApp';
 
-export const ProductCard = ({ product }) => {
+export const ProductCard = ({ product, date }) => {
     const { idproducto, nomproducto, imgproducto, catproducto } = product;
     const [productSelec, setProductSelec] = useState(false);
-    const { getProductInReserve } = useApp();
+    const { handleAddProductInReserve } = useApp();
 
     const handleSelec = () => {
         // setProductSelec(!productSelec)
-        const product = getProductInReserve(catproducto);
-        console.log(product);
+        // const product = getProductInReserve(catproducto);
+        // console.log(product);
+        const product = { idproducto, nomproducto, catproducto }
+        setProductSelec(handleAddProductInReserve(catproducto, product, date.replaceAll('-','/')));
     }
 
     return (

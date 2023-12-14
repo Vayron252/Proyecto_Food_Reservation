@@ -20,7 +20,7 @@ const ReservationPage = () => {
           <h2 className="reserva__producto__titulo">Selecciona tu refresco:</h2>
           <div className="producto__seccion">
             {menu.filter(product => product.catproducto == 'refresco').map(product => (
-              <ProductCard key={product.idproducto} product={product} />
+              <ProductCard key={product.idproducto} product={product} date={date} />
             ))}
           </div>
         </div>
@@ -28,7 +28,7 @@ const ReservationPage = () => {
           <h2 className="reserva__producto__titulo">Selecciona tu entrada:</h2>
           <div className="producto__seccion">
             {menu.filter(product => product.catproducto == 'entrada').map(product => (
-              <ProductCard key={product.idproducto} product={product} />
+              <ProductCard key={product.idproducto} product={product} date={date} />
             ))}
           </div>
         </div>
@@ -36,7 +36,7 @@ const ReservationPage = () => {
           <h2 className="reserva__producto__titulo">Selecciona tu plato de fondo:</h2>
           <div className="producto__seccion">
             {menu.filter(product => product.catproducto == 'fondo').map(product => (
-              <ProductCard key={product.idproducto} product={product} />
+              <ProductCard key={product.idproducto} product={product} date={date} />
             ))}
           </div>
         </div>

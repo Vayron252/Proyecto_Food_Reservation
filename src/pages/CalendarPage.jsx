@@ -88,7 +88,8 @@ const CalendarPage = () => {
             });
             return;
         }
-        if (daysLunch.includes(fecha)) {
+        // if (daysLunch.includes(fecha)) {
+        if (daysLunch.filter(days => days.fecha === fecha).length > 0) {
             Swal.fire({
                 title: "Mensaje al usuario",
                 text: "La fecha seleccionada ya tiene una reserva.",

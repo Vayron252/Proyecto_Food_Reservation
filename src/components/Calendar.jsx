@@ -35,6 +35,9 @@ export const Calendar = ({ month, year, today, daysLunch,
   }
 
   const initializeCalendar = () => {
+    // console.log(daysLunch);
+    // const daysReserve = daysLunch.map(days => days.fecha);
+    // console.log(daysReserve);
     // const date = fechaDate(month, year);
     // setMonthName(new Intl.DateTimeFormat('es-PE', { month: 'long' }).format(date));
     const lastDayOfMonth = getLastDayOfMonth(date);
@@ -47,7 +50,8 @@ export const Calendar = ({ month, year, today, daysLunch,
         today: dayCalendar.getTime() === today.getTime() ? true : false, 
         number: counter, 
         date: dateFormater, 
-        lunch: daysLunch.includes(dateFormater),
+        // lunch: daysReserve.includes(dateFormater),
+        lunch: daysLunch.filter(day => day.fecha === dateFormater).length > 0 ? true : false,
         // disabled: dayCalendar < today ? true : false
         disabled: isDisabledDay(dayCalendar)
       }
