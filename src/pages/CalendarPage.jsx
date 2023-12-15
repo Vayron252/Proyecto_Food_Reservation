@@ -135,49 +135,49 @@ const CalendarPage = () => {
         });
     }
 
-    const handleTest = () => {
-        let programationLunch;
-        Swal.fire({
-            title: "Programaciones activas",
-            text: "Obteniendo datos...",
-            allowOutsideClick: false,
-            didOpen: async () => {
-                Swal.showLoading();
-                programationLunch = await getNewProgramation();
-                Swal.clickConfirm();
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                if (Object.keys(programationLunch).length <= 0) {
-                    Swal.fire({
-                        title: "Error!",
-                        text: "No se ha encontrado una programación activa.",
-                        icon: "error",
-                        showConfirmButton: true,
-                        allowOutsideClick: false
-                    });
-                    return;
-                }
+    // const handleTest = () => {
+    //     let programationLunch;
+    //     Swal.fire({
+    //         title: "Programaciones activas",
+    //         text: "Obteniendo datos...",
+    //         allowOutsideClick: false,
+    //         didOpen: async () => {
+    //             Swal.showLoading();
+    //             programationLunch = await getNewProgramation();
+    //             Swal.clickConfirm();
+    //         }
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             if (Object.keys(programationLunch).length <= 0) {
+    //                 Swal.fire({
+    //                     title: "Error!",
+    //                     text: "No se ha encontrado una programación activa.",
+    //                     icon: "error",
+    //                     showConfirmButton: true,
+    //                     allowOutsideClick: false
+    //                 });
+    //                 return;
+    //             }
 
-                const date = getFullDate(programationLunch.anio, programationLunch.mes, 1);
-                const nameMonth = getNameMonthLong(date);
+    //             const date = getFullDate(programationLunch.anio, programationLunch.mes, 1);
+    //             const nameMonth = getNameMonthLong(date);
 
-                Swal.fire({
-                    title: `¿Desea realizar la reserva para ${nameMonth} - ${programationLunch.anio}?`,
-                    text: "",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonText: "Si, Realizar!",
-                    cancelButtonText: "Cancelar",
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        navigate(`/calendario/${programationLunch.mes}/${programationLunch.anio}`);
-                    }
-                });
-            }
-        });
-    }
+    //             Swal.fire({
+    //                 title: `¿Desea realizar la reserva para ${nameMonth} - ${programationLunch.anio}?`,
+    //                 text: "",
+    //                 icon: "question",
+    //                 showCancelButton: true,
+    //                 confirmButtonText: "Si, Realizar!",
+    //                 cancelButtonText: "Cancelar",
+    //                 allowOutsideClick: false
+    //             }).then((result) => {
+    //                 if (result.isConfirmed) {
+    //                     navigate(`/calendario/${programationLunch.mes}/${programationLunch.anio}`);
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
 
     // const handleNewCalendarReserve = async () => {
     //     setLoading(true);

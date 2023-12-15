@@ -377,3 +377,19 @@
     font-weight: 700;
     color: var(--colorPrimario);
 }
+.reserva__productos__spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin: 4rem 0 2rem 0;
+}
+.reserva__productos__spinner .sk-circle {
+    width: 6rem;
+    height: 6rem;
+}
+.reserva__productos__spinner__texto {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--colorPrimario);
+}
