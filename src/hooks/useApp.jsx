@@ -1,31 +1,12 @@
 import { useContext } from 'react'
 import { AppContext } from '../contexts/AppContext'
-import { useNavigate } from 'react-router-dom'
 
 export const useApp = () => {
-    const navigate = useNavigate();
     const { openSidebar, setOpenSidebar,
             reserve, setReserve } = useContext(AppContext);
 
     const handleOpenOrCloseSidebar = () => {
         setOpenSidebar(!openSidebar);
-    }
-
-    const handleSaveReserve = async () => {
-        const response = await fetch('https://apitestprueba-4fg7.onrender.com/reservas', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fecha: reserve.date })
-        })
-        const result = await response.json();
-        console.log(result);
-        setReserve({})
-        navigate('/calendario')
-        // .then(response => response.json())
-        // .then(data => console.log(data))
-        // .then(setReserve({}))
-        // .then(navigate('/calendario'))
-        // .catch(error => console.error(error));
     }
     
     const handleAddProductInReserve = (type, product, date) => {
@@ -63,6 +44,6 @@ export const useApp = () => {
 
     return {
         openSidebar, handleOpenOrCloseSidebar,
-        reserve, handleAddProductInReserve, handleSaveReserve
+        reserve, setReserve, handleAddProductInReserve
     }
 }
