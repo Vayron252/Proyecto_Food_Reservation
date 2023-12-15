@@ -9,20 +9,44 @@ export const ReservationFooter = () => {
   const { reserve, setReserve } = useApp();
 
   const handleSaveReserve = async () => {
-    const result = await saveReserve(reserve);
-    if (Object.keys(result).length > 0) {
-      Swal.fire({
-        title: "Mensaje al usuario",
-        text: "La reserva se realizó correctamente.",
-        icon: "success",
-        allowOutsideClick: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          setReserve({})
-          navigate('/calendario')
-        }
-      });
-    }
+    Swal.fire({
+      title: `¿Está seguro(a) de realizar la reserva?`,
+      text: "",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Si, Reservar!",
+      cancelButtonText: "Cancelar",
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Mensaje al usuario",
+          text: "Realizando la reserva...",
+          allowOutsideClick: false,
+          didOpen: async () => {
+            Swal.showLoading();
+            const reserveDone = await saveReserve(reserve);
+            if (Object.keys(reserveDone).length > 0) {
+              Swal.clickConfirm();
+            }
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Mensaje al usuario",
+              text: "La reserva se realizó correctamente.",
+              icon: "success",
+              allowOutsideClick: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                setReserve({});
+                navigate('/calendario', { replace: true });
+              }
+            });
+          }
+        });
+      }
+    });
   }
 
   return (
