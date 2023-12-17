@@ -8,11 +8,12 @@ export const Calendar = ({ month, year, today, daysLunch,
   const date = getFullDate(year, month, 1);
   const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
   const monthName = getNameMonthLong(date);
+  const calendarRef = useRef(null);
+  const daysRefs = useRef([]);
 
   const [numbersDay, setNumbersDay] = useState([]);
   const firstDayOfMonthRef = useRef(null);
   
-  // const refs = useRef([]);
   const isDisabledDay = (dayCalendar) => {
     let validations = [];
     programation.forEach(prog => {
@@ -63,20 +64,20 @@ export const Calendar = ({ month, year, today, daysLunch,
     // console.log(refs.current);
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     initializeCalendar();
-  }, [month, year])
+  }, [])
 
   useLayoutEffect(() => {
-    // console.log(refs.current);
+    // console.log(daysRefs.current);
     // refs.current.style.gridColumn = `1 / span 1`;
-    // if (refs.current[0]) {
-    //   refs.current[0].style.gridColumn = `${date.getDay() + 1} / span 1`;
-    //   // console.log(refs.current[0].style.gridColumn = `1 / span 1`)
-    // }
-    if (firstDayOfMonthRef.current) {
-      firstDayOfMonthRef.current.style.gridColumn = `${date.getDay() + 1} / span 1`;
+    if (daysRefs.current[`01/${month.toString().padStart(2, '0')}/${year}`]) {
+      daysRefs.current[`01/${month.toString().padStart(2, '0')}/${year}`].style.gridColumn = `${date.getDay() + 1} / span 1`;
+      // console.log(refs.current[0].style.gridColumn = `1 / span 1`)
     }
+    // if (firstDayOfMonthRef.current) {
+    //   firstDayOfMonthRef.current.style.gridColumn = `${date.getDay() + 1} / span 1`;
+    // }
   });
 
   // const handleClickDay = (e) => {
@@ -89,6 +90,10 @@ export const Calendar = ({ month, year, today, daysLunch,
   //   setDaySelect(e.target);
   // }
 
+  const handleSelection = (e) => {
+    handleSelectDay(e, daysRefs.current[e.target.getAttribute('data-date')]);
+  }
+
   return (
     <div className="calendario__mes">
       <h2 className="calendario__mes__nombre">{`${monthName.toUpperCase()} - ${year}`}</h2>
@@ -97,17 +102,19 @@ export const Calendar = ({ month, year, today, daysLunch,
           <div className="calendario__mes__semana__dia" key={dayName}>{dayName}</div>
         ))}
       </div>
-      <div className="calendario__mes__dias">
+      <div className="calendario__mes__dias" ref={calendarRef}>
         {/* <div ref={initialDayOfMonthRef} className="calendario__mes__dia" key={1}>1</div> */}
         {/* {numbersDay.map(dayNumber => (
             dayNumber !== 1 ? <div className="calendario__mes__dia" key={dayNumber}>{dayNumber}</div> : null
           ))} */}
         {/* ref={ref => (refs.current[i] = ref)} */}
         {numbersDay.map((dayNumber, i) => (
-          <div disabled={dayNumber.disabled} ref={dayNumber.number === 1 ? firstDayOfMonthRef : null}
-            onClick={e => handleSelectDay(e)} data-date={dayNumber.date}
+          <div disabled={dayNumber.disabled} 
+            // ref={dayNumber.number === 1 ? firstDayOfMonthRef : null}
+            onClick={e => handleSelection(e)} data-date={dayNumber.date}
             className="calendario__mes__dia"
-            key={dayNumber.number}>
+            ref={ref => (daysRefs.current[dayNumber.date] = ref)}
+            key={dayNumber.number} >
             {dayNumber.number} 
             {dayNumber.lunch && <div className="calendario__mes__dia__almuerzo"><i className="fa-solid fa-utensils"></i></div>}
             {dayNumber.today && <div className="calendario__mes__dia__hoy"></div>}

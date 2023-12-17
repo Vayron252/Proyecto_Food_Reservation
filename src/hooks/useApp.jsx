@@ -39,7 +39,7 @@ export const useApp = () => {
                 products: [product]
             })
             return true;
-        }
+        }s
     }
 
     return {

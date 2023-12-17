@@ -32,7 +32,7 @@ export const loaderCalendar = async () => {
 const CalendarPage = () => {
     // const { daysReserve, newProgramation } = useLoaderData();
     const { data } = useLoaderData();
-    let fecha = "", daySelect = null, daysLunch = [];
+    let fecha = "", daySelectRef = null, daysLunch = [];
     const firstDayCurrent = getFullDate(getCurrentYear(), getCurrentMonth(), 1);
     // let calendarShow = [{ mes: firstDayCurrent.getMonth() + 1, anio: firstDayCurrent.getFullYear() }];
     const today = getFullDate(getCurrentYear(), getCurrentMonth(), getCurrentDay());
@@ -66,18 +66,6 @@ const CalendarPage = () => {
     //     }
     // }, [daySelect])
 
-    const handleSelectDay = (element) => {
-        if (daySelect !== null) {
-            daySelect.classList.remove('selecc');
-        }
-        element.target.classList.add('selecc');
-        //   const fechaSeleccionada = e.target.getAttribute('data-fecha');
-        //   setFecha(fechaSeleccionada);
-        //setDaySelect(element.target);
-        daySelect = element.target;
-        fecha = daySelect.getAttribute('data-date');
-    }
-
     const handleClick = () => {
         if(fecha === '') {
             Swal.fire({
@@ -98,8 +86,8 @@ const CalendarPage = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     fecha = "";
-                    daySelect.classList.remove('selecc');
-                    daySelect = null; 
+                    daySelectRef.classList.remove('selecc');
+                    daySelectRef = null; 
                 }
             });
             return;
@@ -129,8 +117,8 @@ const CalendarPage = () => {
                 // });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 fecha = "";
-                daySelect.classList.remove('selecc');
-                daySelect = null;
+                daySelectRef.classList.remove('selecc');
+                daySelectRef = null;
             }
         });
     }
@@ -225,10 +213,37 @@ const CalendarPage = () => {
     const renderCalendars = (data) => {
         const [ daysReserve, newProgramation ] = data;
         daysLunch = daysReserve;
+        // let daySelect = null;
+        const [daySelect, setDaySelect] = useState(null);
+        const [dayRefSelect, setDayRefSelect] = useState(null);
 
-        // useEffect(() => {
-          
-        // }, [])
+        const handleSelectDay = (element, dayRef) => {
+            if (daySelect !== null) {
+                daySelect.classList.remove('selecc');
+            }
+            if (dayRef != undefined) {
+                element.target.classList.add('selecc');
+                //   const fechaSeleccionada = e.target.getAttribute('data-fecha');
+                //   setFecha(fechaSeleccionada);
+                //setDaySelect(element.target);
+                setDaySelect(element.target);
+                setDayRefSelect(dayRef);
+                daySelectRef = dayRef;
+                fecha = element.target.getAttribute('data-date');
+            } 
+            else {
+                setDaySelect(null);
+                setDayRefSelect(null);
+                daySelectRef = null;
+                fecha = '';
+            }
+        }
+
+        useLayoutEffect(() => {
+          if (dayRefSelect != null) {
+            dayRefSelect.classList.remove('selecc');
+          }
+        }, [])
 
         // useLayoutEffect(() => {
         //     setDaysLunch(daysReserve);
